@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <h1>Manage Question Login Page</h1>
-      <router-link v-if="authenticated" to="/" v-on:click.native="logout()" replace>Logout</router-link>
-    </div>
+      <div id = "logout">
+        <router-link v-if="authenticated" to="/" v-on:click.native="logout()" replace>Logout</router-link>
+      </div>
     <router-view @authenticated ="setAuthenticated"/>
   </div>
 </template>
@@ -44,5 +43,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#logout {
+  text-align: right
 }
 </style>
