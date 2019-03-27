@@ -1,7 +1,5 @@
 <template>
   <div id="manage">
-    <h1>Secure Area</h1>
-    <p>This is a secure area</p>
   </div>
 </template>
 
@@ -15,9 +13,8 @@ export default {
 </script>
 
 <style scoped>
-#secure {
+#manage {
   background-color: #ffffff;
-  border: 1px solid #cccccc;
   padding: 20px;
   margin-top: 10px;
 }
