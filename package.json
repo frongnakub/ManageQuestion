@@ -1,8 +1,8 @@
 {
-  "name": "Manage Question",
+  "name": "y",
   "version": "1.0.0",
-  "description": "Manage Question",
-  "author": "Manage Question",
+  "description": "y",
+  "author": "y",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -11,13 +11,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "vue": "^2.6.10",
-=======
     "express": "^4.16.4",
     "mysql": "^2.16.0",
     "vue": "^2.5.2",
->>>>>>> 08aa8c2205966bf85e61f6bf63e07b75af72c165
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

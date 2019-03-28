@@ -1,5 +1,17 @@
 <template>
-  <div id="manage">
+  <div class = "class">
+    <h2> Manage Question </h2>
+    <div  class="manage">
+      <div class= "link">
+        <nav>
+          <ui>
+            <li><router-link to="/AddQuestion">Add Question</router-link></li>
+            <li><router-link to="/EditQuestion">Edit Question</router-link></li>
+            <li><router-link to="/DeleteQuestion">Delete Question</router-link></li>
+          </ui>
+        </nav>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -13,9 +25,10 @@ export default {
 </script>
 
 <style scoped>
-#manage {
+.class {
   background-color: #ffffff;
-  padding: 20px;
-  margin-top: 10px;
+}
+.link {
+  text-align: left
 }
 </style>

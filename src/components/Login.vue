@@ -63,20 +63,17 @@ export default {
 <style type="text/css">
 
 .login {
-  background: #999;
+  background: rgb(186, 185, 185);
 }
 .logins {
-  padding: 2em 0;
-}
-.main {
-  width: 65%;
+  padding: 7em 0;
 }
 .main {
   width: 30%;
   margin: 0em auto;
   padding: 3em;
   background: white;
-  margin-bottom: 2em;
+  margin-bottom: 3em;
 }
 .form-w3agile h3 {
   color: black;
@@ -121,7 +118,7 @@ export default {
   cursor: pointer;
   margin-bottom: 23px;
 }
-#use,
+#user,
 #pass {
   text-align: left;
 }
