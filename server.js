@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-    host: '52.89.165.85',
+    host: '34.221.181.184',
     user: 'proj',
     password: 'Oui_plic2',
     database: 'GrammarBE'
@@ -25,12 +25,18 @@ app.use(bodyParser.urlencoded({
 //     });
 //   });
 
-    connection.query('SELECT * FROM Question', function (error, results, fields) {
+    connection.query('SELECT * FROM question', function (error, results, fields) {
         if (error) { console.log(error) };
         console.log(results)
     });
 
 
+//     connection.query('INSERT INTO question(`questionNo`, `question`, `description`) VALUES ("2","I am _______(go) to the mall.","Present continuous tense")', function (error, results) {
+//     if (error) {
+//         console.log(error)
+//     };
+//     console.log("add completed")
+// });
 
 // app.use((request, response, next) => {
 //     response.header("Access-Control-Allow-Origin", +"*");
