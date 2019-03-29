@@ -5,9 +5,10 @@
       <div class= "link">
         <nav>
           <ui>
-            <li><router-link to="/AddQuestion">Add Question</router-link></li>
-            <li><router-link to="/EditQuestion">Edit Question</router-link></li>
-            <li><router-link to="/DeleteQuestion">Delete Question</router-link></li>
+            <li class="active"><a><router-link to="/Manage">Home</router-link></a></li>
+            <li><a><router-link to="/AddQuestion">Add Question</router-link></a></li>
+            <li><a><router-link to="/EditQuestion">Edit Question</router-link></a></li>
+            <li><a><router-link to="/DeleteQuestion">Delete Question</router-link></a></li>
           </ui>
         </nav>
       </div>
@@ -28,7 +29,31 @@ export default {
 .class {
   background-color: #ffffff;
 }
+.manage {
+  overflow: hidden;
+  background-color: #333;
+}
 .link {
   text-align: left
+}
+.link li {
+  display: inline-block;
+}
+.link li a{
+  display: inline-block;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 17px;
+  color: #f2f2f2;
+  text-align: center;
+}
+.link li:hover{
+  background-color:  #f45119;
+  color: black;
+}
+.active {
+  background-color: #f45119;
+  color: #ffffff
 }
 </style>

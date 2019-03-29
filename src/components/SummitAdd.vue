@@ -1,3 +1,4 @@
+<!--test-->
 <template>
   <div class = "class">
     <h2> Add Question </h2>
@@ -11,40 +12,16 @@
     </div>
       <div class="addq">
         <form action="/AddQuestion">
-          <p><label for="lesson">Lesson</label></p>
-            <select id="lesson" name="lesson">
-              <option ></option>
-              <option value="activeandpassive">Active / Passive</option>
-              <option value="adjectiveandadverb">Adjective / Adverb</option>
-              <option value="article">Article</option>
-            </select>
-          <p><label for="question">Question</label></p>
-          <input type="text" id="question" name="question" placeholder="Question..">
+          <p><label for="lesson">Lesson : {{ lesson }}</label></p>
+          <p><label for="question">Question: {{ question }}</label></p>
           <p><label for="choice">Choice</label></p>
           <div class="choices">
-            <input type="text" id="choice" name="choice1" placeholder="choice 1">
-              <select id="choice" name="choice">
-                  <option value="true">T</option>
-                  <option value="false">F</option>
-              </select>
-            <input type="text" id="choice" name="choice2" placeholder="choice 2">
-              <select id="choice" name="choice">
-                    <option value="true">T</option>
-                    <option value="false">F</option>
-                </select>
-            <input type="text" id="choice" name="choice3" placeholder="choice 3">
-              <select id="choice" name="choice">
-                    <option value="true">T</option>
-                    <option value="false">F</option>
-                </select>
-            <input type="text" id="choice" name="choice4" placeholder="choice 4">
-              <select id="choice" name="choice">
-                    <option value="true">T</option>
-                    <option value="false">F</option>
-                </select>
+            <span>{{ choice1 }}{{ option.value }}</span>
+            <span>{{ choice2 }}{{ option.value }}</span>
+            <span>{{ choice3 }}{{ option.value }}</span>
+            <span>{{ choice3 }}{{ option.value }}</span>
           </div>
-          <p><label for="description">Description</label></p>
-          <textarea id="description" name="description" placeholder="description answer choice.."></textarea>
+          <p><label for="description">Description: {{ description }}</label></p>
           <input type="submit" id="summitaddquestion" value="Submit">
         </form>
       </div>
