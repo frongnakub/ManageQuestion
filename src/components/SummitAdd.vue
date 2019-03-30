@@ -1,4 +1,4 @@
-<!--test-->
+<!--test-->  
 <template>
   <div class = "class">
     <h2> Add Question </h2>
@@ -16,10 +16,10 @@
           <p><label for="question">Question: {{ question }}</label></p>
           <p><label for="choice">Choice</label></p>
           <div class="choices">
-            <span>{{ choice1 }}{{ option.value }}</span>
-            <span>{{ choice2 }}{{ option.value }}</span>
-            <span>{{ choice3 }}{{ option.value }}</span>
-            <span>{{ choice3 }}{{ option.value }}</span>
+            <span>{{ choices.choice1 }}{{ option.value }}</span>
+            <span>{{ choices.choice2 }}{{ option.value }}</span>
+            <span>{{ choices.choice3 }}{{ option.value }}</span>
+            <span>{{ choices.choice4 }}{{ option.value }}</span>
           </div>
           <p><label for="description">Description: {{ description }}</label></p>
           <input type="submit" id="summitaddquestion" value="Submit">
@@ -29,12 +29,8 @@
 </template>
 
 <script>
-export default {
-  name: 'AddQuestion',
-  data () {
-    return {}
-  }
-}
+
+
 
 </script>
 

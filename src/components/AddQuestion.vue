@@ -3,10 +3,8 @@
     <h2> Add Question </h2>
     <div  class="manage">
       <div class= "link">
-          <li><a><router-link to="/Manage">Home</router-link></a></li>
+          <li><a><router-link to="/Manage">Manage Question</router-link></a></li>
           <li class="active"><a><router-link to="/AddQuestion">Add Question</router-link></a></li>
-          <li><a><router-link to="/EditQuestion">Edit Question</router-link></a></li>
-          <li><a><router-link to="/DeleteQuestion">Delete Question</router-link></a></li>
       </div>
     </div>
       <div class="addq">
@@ -57,6 +55,7 @@ export default {
   data () {
     return {}
   }
+
 }
 
 </script>

@@ -5,10 +5,8 @@
       <div class= "link">
         <nav>
           <ui>
-            <li class="active"><a><router-link to="/Manage">Home</router-link></a></li>
+            <li class="active"><a><router-link to="/Manage">Manage Question</router-link></a></li>
             <li><a><router-link to="/AddQuestion">Add Question</router-link></a></li>
-            <li><a><router-link to="/EditQuestion">Edit Question</router-link></a></li>
-            <li><a><router-link to="/DeleteQuestion">Delete Question</router-link></a></li>
           </ui>
         </nav>
       </div>
