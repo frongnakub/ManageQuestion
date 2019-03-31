@@ -5,6 +5,7 @@ import Manage from '@/components/Manage'
 import AddQuestion from '@/components/AddQuestion'
 import EditQuestion from '@/components/EditQuestion'
 import DeleteQuestion from '@/components/DeleteQuestion'
+import AddQ from '@/components/AddQ'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/DeleteQuestion',
       name: 'deleteQuestion',
       component: DeleteQuestion
+    },
+    {
+      path: '/AddQuestion/submit',
+      name: 'submitAdd',
+      component: AddQ
     }
   ]
 })

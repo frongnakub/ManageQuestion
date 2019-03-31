@@ -22,28 +22,32 @@
           <div class="choices">
             <input type="text" id="choice" name="choice1" placeholder="choice 1">
               <select id="choice" name="choice">
-                  <option value="true">T</option>
-                  <option value="false">F</option>
+                <option ></option>
+                <option value="true">T</option>
+                <option value="false">F</option>
               </select>
             <input type="text" id="choice" name="choice2" placeholder="choice 2">
               <select id="choice" name="choice">
-                    <option value="true">T</option>
-                    <option value="false">F</option>
+                <option ></option>
+                <option value="true">T</option>
+                <option value="false">F</option>
                 </select>
             <input type="text" id="choice" name="choice3" placeholder="choice 3">
               <select id="choice" name="choice">
-                    <option value="true">T</option>
-                    <option value="false">F</option>
+                <option ></option>
+                <option value="true">T</option>
+                <option value="false">F</option>
                 </select>
             <input type="text" id="choice" name="choice4" placeholder="choice 4">
               <select id="choice" name="choice">
-                    <option value="true">T</option>
-                    <option value="false">F</option>
+                <option ></option>
+                <option value="true">T</option>
+                <option value="false">F</option>
                 </select>
           </div>
           <p><label for="description">Description</label></p>
           <textarea id="description" name="description" placeholder="description answer choice.."></textarea>
-          <input type="submit" id="summitaddquestion" value="Submit">
+          <router-link to="/AddQuestion/submit"><button type="button" id="submit" >Submit</button></router-link>
         </form>
       </div>
     </div>
@@ -124,7 +128,7 @@ textarea{
   size: fixed;
   height:200px;
 }
-input[type=submit] {
+button[type=button] {
   width: 100%;
   background-color: #f45119;
   color: white;
@@ -135,7 +139,7 @@ input[type=submit] {
   cursor: pointer;
   font-size: 16px;
 }
-input[type=submit]:hover {
+button[type=button]:hover {
   opacity: 0.6
 }
 .choices select{

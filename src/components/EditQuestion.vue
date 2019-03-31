@@ -1,35 +1,54 @@
 <template>
   <div class = "class">
-    <h2> Edit Question </h2>
+    <h2> Manage Question </h2>
     <div  class="manage">
       <div class= "link">
-          <li><a><router-link to="/Manage">Home</router-link></a></li>
-          <li ><a><router-link to="/AddQuestion">Add Question</router-link></a></li>
-          <li class="active"><a><router-link to="/EditQuestion">Edit Question</router-link></a></li>
-          <li><a><router-link to="/DeleteQuestion">Delete Question</router-link></a></li>
+            <li class="active"><a><router-link to="/Manage">Manage Question</router-link></a></li>
+            <li><a><router-link to="/AddQuestion">Add Question</router-link></a></li>
       </div>
     </div>
-    <div class="eddq">
-      <form>
-        <p><label for="lesson">Lesson</label></p>
-            <select id="lesson" name="lesson">
-              <option ></option>
-              <option value="activeandpassive">Active / Passive</option>
-              <option value="adjectiveandadverb">Adjective / Adverb</option>
-              <option value="article">Article</option>
-            </select>
-        <!--เมื่อเลือกบทเรียนที่จะทำการแก้ไข ก็จะขึ้นโจทย์ของบทเรียนนั้นให้เลือกว่าจะแก้ไขคำถามไหน หรือจะsearchก็ได้ -->
-        <p><label for="showquestion">Question</label></p>
-        <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." >
-        <span>show question</span>
-        <!--เมื่อเลือกโจทย์จะขึ้นโชว์choicesให้ -->
-        <p><label for="choice">Choice</label></p>
-        <span>show choice</span>
-        <!-- -->
-        <p><label for="description">Description</label></p>
-        <span>show description</span>
-        <input type="submit" id="summiteditquestion" value="Submit">
+    <div class="manageq">
+        <router-link to="/Manage"><button type="button" id="back">&#8249;</button></router-link>
+        <router-link to="/DeleteQuestion"><button type="button" id="delete"></button></router-link>
+      <form action="/Manage">
+          <p><label for="lesson">Lesson</label></p>
       </form>
+      <div class="addq">
+          <form action="/AddQuestion">
+          <p><label for="question">Question</label></p>
+          <input type="text" id="question" name="question" >
+          <p><label for="choice">Choice</label></p>
+          <div class="choices">
+            <input type="text" id="choice" name="choice1" >
+              <select id="choice" name="choice">
+                <option ></option>
+                <option value="true">T</option>
+                <option value="false">F</option>
+              </select>
+            <input type="text" id="choice" name="choice2" >
+              <select id="choice" name="choice">
+                <option ></option>
+                <option value="true">T</option>
+                <option value="false">F</option>
+                </select>
+            <input type="text" id="choice" name="choice3" >
+              <select id="choice" name="choice">
+                <option ></option>
+                <option value="true">T</option>
+                <option value="false">F</option>
+                </select>
+            <input type="text" id="choice" name="choice4" >
+              <select id="choice" name="choice">
+                <option ></option>
+                <option value="true">T</option>
+                <option value="false">F</option>
+                </select>
+          </div>
+          <p><label for="description">Description</label></p>
+          <textarea id="description" name="description" ></textarea>
+          <router-link to="/EditQuestion/submit"><button type="button" id="submit">Edit</button></router-link>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -74,7 +93,7 @@ export default {
   background-color: #f45119;
   color: #ffffff
 }
-.eddq {
+.manageq {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
@@ -83,7 +102,7 @@ p{
   text-align: left;
   font-size: 20px;
 }
-select {
+input[type=text]{
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -93,28 +112,57 @@ select {
   box-sizing: border-box;
   font-size: 16px;
 }
-input[type=submit] {
+textarea,select {
   width: 100%;
-  background-color: #f45119;
-  color: white;
-  padding: 14px 20px;
+  padding: 12px 20px;
   margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+textarea{
+  size: fixed;
+  height:200px;
+}
+button[type=button] {
+  padding: 14px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
 }
-input[type=submit]:hover {
+button[type=button][id=back]{
+  padding: 0 0;
+  font-size: 50px;
+  width: 50px;
+  height: 60px;
+  color: black;
+}
+button[type=button][id=delete]{
+  width: 20px;
+}
+button[type=button][id=submit]{
+  color: white;
+  width: 20%;
+  margin-left: 80%;
+  background-color: #f45119;
+}
+button[type=button]:hover {
   opacity: 0.6
 }
-input[type=text]{
+.choices select{
+  width: 10%;
+}
+.choices input[type=text]{
+  width: 80%;
   padding: 12px 20px;
-  margin-top: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  width: 100%;
+  margin: 8px 0;
   display: inline-block;
+  border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  font-size: 16px;
 }
 </style>
