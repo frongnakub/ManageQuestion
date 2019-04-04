@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
 //     });
 //   });
 
-    connection.query('SELECT * FROM question', function (error, results, fields) {
+    connection.query('SELECT * FROM Question', function (error, results, fields) {
         if (error) { console.log(error) };
         console.log(results)
     });
