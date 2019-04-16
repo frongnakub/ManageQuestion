@@ -1,51 +1,41 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
-import Manage from '@/components/Manage'
-import AddQuestion from '@/components/AddQuestion'
-import EditQuestion from '@/components/EditQuestion'
-import DeleteQuestion from '@/components/DeleteQuestion'
-import AddQ from '@/components/AddQ'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import 'vuetify/src/stylus/app.styl'
+import '@mdi/font/css/materialdesignicons.css'
+import '@fortawesome/fontawesome-free/css/all.css'
+import 'font-awesome/css/font-awesome.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import TestVuetify from '@/components/TestVuetify'
+import ManageQuestion from '@/components/ManageQuestion'
+import ManageLesson from '@/components/ManageLesson'
 
 Vue.use(Router)
+Vue.use(Vuetify)
 
 export default new Router({
   routes: [
     {
       path: '/',
       redirect: {
-        name: 'Login'
+        name: 'TestVuetify'
       }
     },
     {
-      path: '/Login',
-      name: 'Login',
-      component: Login
+      path: '/TestVuetify',
+      name: 'TestVuetify',
+      component: TestVuetify
     },
     {
-      path: '/Manage',
-      name: 'manage',
-      component: Manage
+      path: '/ManageQuestion',
+      name: 'manageQuestion',
+      component: ManageQuestion
     },
     {
-      path: '/AddQuestion',
-      name: 'addQuestion',
-      component: AddQuestion
-    },
-    {
-      path: '/EditQuestion',
-      name: 'editQuestion',
-      component: EditQuestion
-    },
-    {
-      path: '/DeleteQuestion',
-      name: 'deleteQuestion',
-      component: DeleteQuestion
-    },
-    {
-      path: '/AddQuestion/submit',
-      name: 'submitAdd',
-      component: AddQ
+      path: '/ManageLesson',
+      name: 'manageLesson',
+      component: ManageLesson
     }
   ]
 })

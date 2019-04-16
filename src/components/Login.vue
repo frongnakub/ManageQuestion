@@ -31,12 +31,12 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: '',
   data () {
     return {
       input: {
-        username: '',
-        password: ''
+        username: 'frongnakub',
+        password: 'password'
       }
     }
   },
@@ -48,7 +48,7 @@ export default {
           this.input.password === this.$parent.mockAccount.password
         ) {
           this.$emit('authenticated', true)
-          this.$router.replace({ name: 'manage' })
+          this.$router.replace({ name: 'manageQuestion' })
         } else {
           console.log('The username and / or password is incorrect')
         }
