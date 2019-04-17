@@ -26,12 +26,9 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex>
-                  Lesson : <v-text-field v-model="editedItem.name"></v-text-field>
-                  Sub-Lesson : <v-text-field v-model="editedItem.calories" ></v-text-field>
-                  Question type<v-text-field v-model="editedItem.fat" ></v-text-field>
-                  Question<v-text-field v-model="editedItem.carbs" ></v-text-field>
-                  Choices<v-text-field v-model="editedItem.carbs" ></v-text-field>
-                  Description<v-text-field v-model="editedItem.carbs" ></v-text-field>
+                  Question<v-text-field v-model="editedItem.question" ></v-text-field>
+                  Lesson<v-text-field v-model="editedItem.lessonName" ></v-text-field>
+                  Description<v-text-field v-model="editedItem.description" ></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -46,16 +43,14 @@
 
         <v-data-table
           :headers="headers"
-          :items="desserts"
+          :items="questions"
           :search="search"
           class="elevation-1"
         >
           <template v-slot:items="props">
-            <td>{{ props.item.name }}</td>
-            <td class="text-xs-right">{{ props.item.calories }}</td>
-            <td class="text-xs-right">{{ props.item.fat }}</td>
-            <td class="text-xs-right">{{ props.item.carbs }}</td>
-            <td class="text-xs-right">{{ props.item.protein }}</td>
+            <td>{{ props.item.question }}</td>
+            <td>{{ props.item.lessonName }}</td>
+            <td>{{ props.item.description }}</td>
             <td class="justify-center layout px-0">
               <v-icon
                 small
@@ -73,7 +68,7 @@
             </td>
           </template>
           <template v-slot:no-data>
-            <v-btn color="primary" @click="initialize">Reset</v-btn>
+            <v-btn color="primary" @click="initialize()">Reset</v-btn>
           </template>
           <v-alert v-slot:no-results :value="true" color="error" icon="warning">
             Your search for "{{ search }}" found no results.
@@ -84,38 +79,26 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'ManageQuestion',
   data: () => ({
     search: '',
     dialog: false,
     headers: [
-      {
-        text: 'Lesson',
-        align: 'left',
-        sortable: false,
-        value: 'name'
-      },
-      { text: 'Sub-Lesson', value: 'calories', sortable: false },
-      { text: 'Question Type', value: 'fat', sortable: false },
-      { text: 'Question', value: 'carbs', sortable: false },
-      { text: 'Actions', value: 'name', sortable: false }
+      { text: 'Question', align: 'center', value: 'question', sortable: false },
+      { text: 'Lesson', align: 'center', value: 'lessonName', sortable: false },
+      { text: 'Description', align: 'center', value: 'description', sortable: false }
     ],
-    desserts: [],
+    questions: [],
     editedIndex: -1,
     editedItem: {
-      name: '',
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
+      question: '',
+      description: ''
     },
     defaultItem: {
-      name: '',
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
+      question: '',
+      description: ''
     }
   }),
   computed: {
@@ -133,40 +116,35 @@ export default {
   },
   methods: {
     initialize () {
-      this.desserts = [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0
-        }
+      this.questions = [
+        axios
+          .get('http://localhost:3003/questions')
+          .then(response => {
+            console.log(response)
+            this.questions = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        // {
+        //   question: 'I am ______ (run) into the woods.',
+        //   description: 'This question is a Present Continuous tense, so the answer need to be V.ing'
+        // },
+        // {
+        //   question: 'What _____ (do) you do yesterday?',
+        //   description: 'In Past Simple Tense, you need to answer by Verb 2.'
+        // }
       ]
     },
-
     editItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      this.editedIndex = this.questions.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      const index = this.desserts.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+      const index = this.questions.indexOf(item)
+      confirm('Are you sure you want to delete this item?') && this.questions.splice(index, 1)
     },
 
     close () {
@@ -179,9 +157,9 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        Object.assign(this.questions[this.editedIndex], this.editedItem)
       } else {
-        this.desserts.push(this.editedItem)
+        this.questions.push(this.editedItem)
       }
       this.close()
     }
