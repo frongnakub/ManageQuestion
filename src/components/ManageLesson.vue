@@ -12,7 +12,7 @@
       src="https://wallpapercave.com/wp/wp2499654.jpg"
     >
     <v-container>
-      <v-dialog v-model="dialog" max-width="100%"> 
+      <v-dialog v-model="dialog" max-width="100%">
       <template v-slot:activator="{ on }">
         <v-btn v-on="on" align-center justify-end>Add New Question</v-btn>
           <v-text-field
@@ -187,12 +187,12 @@ export default {
     editedItem: {
       lessonName: '',
       subLesson: '',
-      lessonDetail: '',
+      lessonDetail: ''
     },
     defaultItem: {
       lessonName: '',
       subLesson: '',
-      lessonDetail: '',
+      lessonDetail: ''
     }
   }),
   computed: {
@@ -252,4 +252,3 @@ export default {
   }
 }
 </script>
-
