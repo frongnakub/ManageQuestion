@@ -12,7 +12,7 @@
       src="https://wallpapercave.com/wp/wp2499654.jpg"
     >
     <v-container>
-      <v-dialog v-model="dialog" max-width="100%"> 
+      <v-dialog v-model="dialog" max-width="100%">
       <template v-slot:activator="{ on }">
         <v-btn v-on="on" align-center justify-end>Add New Question</v-btn>
           <v-text-field
@@ -37,7 +37,7 @@
                     :rules="[rules.lengthQ(),]"
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12>
+                <!-- <v-flex xs12>
                   <v-list-tile >Questions Type*</v-list-tile>
                   <v-radio-group row v-model="editedItem.questionType" >
                     <v-radio
@@ -53,7 +53,7 @@
                       value="postTest"
                     ></v-radio>
                   </v-radio-group>
-                </v-flex>
+                </v-flex> -->
                 <!--<v-flex xs12>
                   <v-list-tile>Choice*</v-list-tile>
                   <v-layout align-center>
@@ -102,7 +102,7 @@
                     label="Lesson"
                   ></v-select>
                 </v-flex>
-                <v-flex xs12>
+                <!-- <v-flex xs12>
                   <v-list-tile>Sub-Lesson*</v-list-tile>
                   <v-select
                     solo
@@ -110,13 +110,23 @@
                     :items="SubLesson"
                     label="Sub-Lesson"
                   ></v-select>
-                </v-flex>
+                </v-flex> -->
                 <v-flex xs12>
                   <v-list-tile>Description</v-list-tile>
                   <v-textarea
                   solo
                   name="input-7-4"
                   v-model="editedItem.description"
+                  :rules="[rules.lengthD()]"
+                  counter="300"
+                  ></v-textarea>
+                </v-flex>
+                 <v-flex xs12>
+                  <v-list-tile>Choices</v-list-tile>
+                  <v-textarea
+                  solo
+                  name="input-7-4"
+                  v-model="editedItem.choices"
                   :rules="[rules.lengthD()]"
                   counter="300"
                   ></v-textarea>
@@ -144,8 +154,8 @@
           <template v-slot:items="props">
             <td >{{ props.item.lessonName }}</td>
             <td >{{ props.item.subLesson }}</td>
-            <td >{{ props.item.questionType }}</td>
-            <td class="text-xs-left">{{ props.item.description }}</td>
+            <td >{{ props.item.testTypeName }}</td>
+            <td class="text-xs-center">{{ props.item.question }}</td>
             <td >
               <v-icon
                 small
@@ -185,7 +195,7 @@ export default {
     headers: [
       { text: 'Lesson', align: 'center', value: 'lessonName', sortable: false },
       { text: 'Sub-Lesson', align: 'center', value: 'subLesson', sortable: false },
-      { text: 'Question Type', align: 'center', value: 'questionType', sortable: false },
+      { text: 'Question for', align: 'center', value: 'testTypeName', sortable: false },
       { text: 'Question', align: 'center', value: 'question', sortable: false },
       { text: 'Actions', align: 'center', value: 'question', sortable: false }
     ],
@@ -196,7 +206,7 @@ export default {
       questionType: '',
       lessonName: '',
       subLesson: '',
-      choice: '',
+      choices: '',
       description: ''
     },
     defaultItem: {
@@ -204,14 +214,14 @@ export default {
       questionType: '',
       lessonName: '',
       subLesson: '',
-      choice: '',
+      choices: '',
       description: ''
     },
     questionR: undefined,
     rules: {
-        lengthQ: len => v => (v || '').length >= 1||'Please enter',
-        lengthD: len => v => (v || '').length >= 1
-     }
+      lengthQ: len => v => (v || '').length >= 1 || 'Please enter',
+      lengthD: len => v => (v || '').length >= 1
+    }
   }),
   computed: {
     formTitle () {

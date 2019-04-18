@@ -53,7 +53,8 @@ app.get('/questions', (req, res) => {
    
     const connection = getConnection()
 
-    connection.query('SELECT question,description,lessonName FROM Question q join Lesson l on q.Lesson_LessonNo = l.LessonNo', function (error, rows, fields) {
+    connection.query('SELECT question,description,lessonName,testTypeName FROM Question q join Lesson l on q.Lesson_LessonNo = l.LessonNo join Test t on q.test_testno = t.testno join TestType tt on t.testType_TestTypeNo = tt.testTypeNo', 
+    function (error, rows, fields) {
         if (error) { 
             console.log(error) 
             res.sendStatus(500)
@@ -64,6 +65,23 @@ app.get('/questions', (req, res) => {
     })
     res.setHeader('Access-Control-Allow-Origin', '*');
 })
+
+// app.get('/choices', (req, res) => {
+//     console.log("Fetching question")
+   
+//     const connection = getConnection()
+
+//     connection.query('SELECT question,choices,choiceType from Question q join Choice c on q.questionNo = c.question_questionNo', function (error, rows, fields) {
+//         if (error) { 
+//             console.log(error) 
+//             res.sendStatus(500)
+//             throw error
+//         };
+//         console.log("I think we fetched successfully")
+//         res.json(rows)
+//     })
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+// })
 
 app.get("/", (req, res) => {
     console.log("Responding to root route")
