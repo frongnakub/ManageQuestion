@@ -96,6 +96,27 @@ export default {
     checkbox: false
   }),
   methods: {
+    initialize () {
+      this.questions = [
+        axios
+          .get('http://localhost:3003/questions')
+          .then(response => {
+            console.log(response)
+            this.questions = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        // {
+        //   question: 'I am ______ (run) into the woods.',
+        //   description: 'This question is a Present Continuous tense, so the answer need to be V.ing'
+        // },
+        // {
+        //   question: 'What _____ (do) you do yesterday?',
+        //   description: 'In Past Simple Tense, you need to answer by Verb 2.'
+        // }
+      ]
+    },
     save () {
       if (this.addIndex > -1) {
         Object.assign(this.questions[this.addIndex], this.addIndex)
