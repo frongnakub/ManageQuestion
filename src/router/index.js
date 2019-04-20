@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Vuetify from 'vuetify'
+import Vuelidate from 'vuelidate'
 import 'vuetify/dist/vuetify.min.css'
 import 'vuetify/src/stylus/app.styl'
 import '@mdi/font/css/materialdesignicons.css'
@@ -11,9 +12,11 @@ import TestVuetify from '@/components/TestVuetify'
 import ManageQuestion from '@/components/ManageQuestion'
 import ManageLesson from '@/components/ManageLesson'
 import AddQuestion from '@/components/AddQuestion'
+import AddLesson from '@/components/AddLesson'
 
 Vue.use(Router)
 Vue.use(Vuetify)
+Vue.use(Vuelidate)
 
 export default new Router({
   routes: [
@@ -42,6 +45,11 @@ export default new Router({
       path: '/AddQuestion',
       name: 'addQuestion',
       component: AddQuestion
+    },
+    {
+      path: '/AddLesson',
+      name: 'addLesson',
+      component: AddLesson
     }
   ]
 })

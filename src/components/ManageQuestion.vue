@@ -15,13 +15,17 @@
       <!--<v-dialog v-model="dialog" max-width="100%">
       <template v-slot:activator="{ on }">
         <v-btn v-on="on" align-center justify-end>Add New Question</v-btn>-->
-        <v-btn flat ><router-link to="/AddQuestion">Add New Question</router-link></v-btn>
+        <v-dialog v-model="dialog" max-width="100%">
+        <template v-slot:activator="{ on }">
+        <v-btn v-on="on" align-center justify-end><router-link to="/AddQuestion">Add New Question</router-link></v-btn>
           <v-text-field
             v-model="search"
             label="Search"
             single-line
             hide-details
           ></v-text-field>
+        </template>
+        </v-dialog>
         <!--</template>-->
       <!--<v-card >
         <v-card-title>
@@ -111,7 +115,7 @@
                     :items="SubLesson"
                     label="Sub-Lesson"
                   ></v-select>
-                </v-flex> 
+                </v-flex>
                 <v-flex xs12>
                   <v-list-tile>Description</v-list-tile>
                   <v-textarea
@@ -156,8 +160,8 @@
             <td >{{ props.item.lessonName }}</td>
             <td >{{ props.item.subLesson }}</td>
             <td >{{ props.item.testTypeName }}</td>
-            <td class="text-xs-center">{{ props.item.question }}</td>
-            <td >
+            <td class="text-xs-left">{{ props.item.question }}</td>
+            <td class="text-xs-center">
               <v-icon
                 small
                 class="mr-2"

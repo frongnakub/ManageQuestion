@@ -14,7 +14,7 @@
     <v-container>
       <v-dialog v-model="dialog" max-width="100%">
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" align-center justify-end>Add New</v-btn>
+        <v-btn v-on="on" align-center justify-end><router-link to="/AddLesson">Add New Lesson</router-link></v-btn>
           <v-text-field
             v-model="search"
             label="Search"
@@ -150,6 +150,7 @@
                 small
                 class="mr-2"
                 @click="editItem(props.item)"
+                href=""
               >
                 edit
               </v-icon>
@@ -252,4 +253,3 @@ export default {
   }
 }
 </script>
-
