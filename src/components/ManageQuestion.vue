@@ -12,17 +12,18 @@
       src="https://wallpapercave.com/wp/wp2499654.jpg"
     >
     <v-container>
-      <v-dialog v-model="dialog" max-width="100%">
+      <!--<v-dialog v-model="dialog" max-width="100%">
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" align-center justify-end>Add New Question</v-btn>
+        <v-btn v-on="on" align-center justify-end>Add New Question</v-btn>-->
+        <v-btn flat ><router-link to="/AddQuestion">Add New Question</router-link></v-btn>
           <v-text-field
             v-model="search"
             label="Search"
             single-line
             hide-details
           ></v-text-field>
-        </template>
-      <v-card >
+        <!--</template>-->
+      <!--<v-card >
         <v-card-title>
           <span class="headline">{{ formTitle }}</span>
         </v-card-title>
@@ -37,7 +38,7 @@
                     :rules="[rules.lengthQ(),]"
                   ></v-text-field>
                 </v-flex>
-                <!-- <v-flex xs12>
+                 <v-flex xs12>
                   <v-list-tile >Questions Type*</v-list-tile>
                   <v-radio-group row v-model="editedItem.questionType" >
                     <v-radio
@@ -92,7 +93,7 @@
                       class="shrink mr-2"
                     ></v-checkbox>
                   </v-layout>
-                </v-flex>-->
+                </v-flex>
                 <v-flex xs12>
                   <v-list-tile>Lesson*</v-list-tile>
                   <v-select
@@ -102,7 +103,7 @@
                     label="Lesson"
                   ></v-select>
                 </v-flex>
-                <!-- <v-flex xs12>
+               <v-flex xs12>
                   <v-list-tile>Sub-Lesson*</v-list-tile>
                   <v-select
                     solo
@@ -110,7 +111,7 @@
                     :items="SubLesson"
                     label="Sub-Lesson"
                   ></v-select>
-                </v-flex> -->
+                </v-flex> 
                 <v-flex xs12>
                   <v-list-tile>Description</v-list-tile>
                   <v-textarea
@@ -131,7 +132,7 @@
                   counter="300"
                   ></v-textarea>
                 </v-flex>
-              </v-layout>
+            </v-layout>
             </v-container>
           </v-card-text>
         <v-divider></v-divider>
@@ -139,12 +140,12 @@
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
             <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-            <!--:disabled="!v"
+            :disabled="!v"
             :loading="isLoading"
-            depressed-->
+            depressed
           </v-card-actions>
         </v-card>
-      </v-dialog>
+      </v-dialog>-->
 
         <v-data-table
           :headers="headers"
@@ -288,7 +289,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

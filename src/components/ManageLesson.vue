@@ -14,7 +14,7 @@
     <v-container>
       <v-dialog v-model="dialog" max-width="100%">
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" align-center justify-end>Add New Question</v-btn>
+        <v-btn v-on="on" align-center justify-end>Add New</v-btn>
           <v-text-field
             v-model="search"
             label="Search"
@@ -145,7 +145,7 @@
             <td >{{ props.item.lessonName }}</td>
             <td >{{ props.item.subLesson }}</td>
             <td >{{ props.item.questionDeatail }}</td>
-            <td fixed>
+            <td >
               <v-icon
                 small
                 class="mr-2"
@@ -252,3 +252,4 @@ export default {
   }
 }
 </script>
+

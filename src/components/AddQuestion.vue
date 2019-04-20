@@ -1,4 +1,5 @@
 <template>
+  <v-app>
     <v-form>
         <v-text-title>
           <span class="headline">Add Question</span>
@@ -10,20 +11,16 @@
                   <v-text-field
                     v-model="addItem.question"
                     solo
-                    :error-messages="questionErrors"
+                    :rule="questionErrors"
                     required
-                    @input="$v.question.$touch()"
-                    @blur="$v.question.$touch()"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12>
                   <v-list-tile >Questions Type*</v-list-tile>
-                  <v-radio-group 
-                    row 
-                    v-model="addItem.questionType" 
-                    :error-messages="radiotErrors"
-                    @input="$v.questionType.$touch()"
-                    @blur="$v.questionType.$touch()"
+                  <v-radio-group
+                    row
+                    v-model="addItem.questionType"
+                    :rule="radiotErrors"
                   >
                     <v-radio
                       label="Pre Test"
@@ -45,9 +42,7 @@
                     solo
                     v-model="addItem.lesson"
                     :items="lessonName"
-                    :error-messages="selectErrors"
-                    @input="$v.select.$touch()"
-                    @blur="$v.select.$touch()"
+                    :rule="selectErrors"
                     label="Lesson"
                   ></v-select>
                 </v-flex>
@@ -57,10 +52,8 @@
                     solo
                     v-model="addItem.subLesson"
                     :items="SubLesson"
-                    :error-messages="selectErrors"
+                    :rule="selectErrors"
                     label="Sub-Lesson"
-                    @input="$v.select.$touch()"
-                    @blur="$v.select.$touch()"
                   ></v-select>
                 </v-flex>
                 <v-flex xs12>
@@ -69,9 +62,7 @@
                   solo
                   name="input-7-4"
                   v-model="addItem.description"
-                  :error-messages="descripErrors"
-                  @input="$v.description.$touch()"
-                  @blur="$v.description.$touch()"
+                  :rule="descripErrors"
                   counter="300"
                   ></v-textarea>
                 </v-flex>
@@ -86,21 +77,13 @@
             depressed-->
           </v-card-actions>
     </v-form>
+  </v-app>
 </template>
 
 <script>
 import axios from 'axios'
-import { validationMixin } from 'vuelidate'
-import { required, maxLength } from 'vuelidate/lib/validators'
 export default {
   name: 'AddQuestion',
-  mixins: [validationMixin],
-  validations: {
-      question: { required, maxLength: maxLength(100) },
-      questionType: { required },
-      select: { required },
-      description: { required, maxLength: maxLength(300) }
-    },
   data: () => ({
     defaultItem: {
       question: '',
@@ -112,45 +95,22 @@ export default {
     },
     checkbox: false
   }),
-  computed: {    
-      questionErrors () {
-        const errors = []
-        if (!this.$v.question.$dirty) return errors
-        !this.$v.question.maxLength && errors.push('Name must be at most 10 characters long')
-        !this.$v.question.required && errors.push('Name is required.')
-        return errors
-      },
-      radioErrors () {
-        const errors = []
-        if (!this.$v.questionType.$dirty) return errors
-        !this.$v.questionType.required && errors.push('Item is required')
-        return errors
-      },
-      selectErrors () {
-        const errors = []
-        if (!this.$v.select.$dirty) return errors
-        !this.$v.select.required && errors.push('Item is required')
-        return errors
-      },
-      descripErrors () {
-        const errors = []
-        if (!this.$v.description.$dirty) return errors
-        !this.$v.description.maxLength && errors.push('Name must be at most 10 characters long')
-        !this.$v.description.required && errors.push('Name is required.')
-        return errors
+  methods: {
+    save () {
+      if (this.addIndex > -1) {
+        Object.assign(this.questions[this.addIndex], this.addIndex)
+      } else {
+        this.questions.push(this.addIndex)
       }
+      this.close()
     },
-    methods: {
-        save () {
-        if (this.addIndex > -1) {
-            Object.assign(this.questions[this.addIndex], this.addIndex)
-        } else {
-            this.questions.push(this.addIndex)
-        }
-        this.close()
-        }
+    close () {
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      }, 300)
     }
-
+  }
 }
 </script>
-

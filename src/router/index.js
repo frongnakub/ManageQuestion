@@ -10,6 +10,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import TestVuetify from '@/components/TestVuetify'
 import ManageQuestion from '@/components/ManageQuestion'
 import ManageLesson from '@/components/ManageLesson'
+import AddQuestion from '@/components/AddQuestion'
 
 Vue.use(Router)
 Vue.use(Vuetify)
@@ -36,6 +37,11 @@ export default new Router({
       path: '/ManageLesson',
       name: 'manageLesson',
       component: ManageLesson
+    },
+    {
+      path: '/AddQuestion',
+      name: 'addQuestion',
+      component: AddQuestion
     }
   ]
 })
