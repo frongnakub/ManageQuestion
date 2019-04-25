@@ -160,7 +160,7 @@
             <td >{{ props.item.lessonName }}</td>
             <td >{{ props.item.subLesson }}</td>
             <td >{{ props.item.testTypeName }}</td>
-            <td class="text-xs-left">{{ props.item.question }}</td>
+            <td class="text-xs-center">{{ props.item.question }}</td>
             <td class="text-xs-center">
               <v-icon
                 small
@@ -253,14 +253,6 @@ export default {
           .catch(error => {
             console.log(error)
           })
-        // {
-        //   question: 'I am ______ (run) into the woods.',
-        //   description: 'This question is a Present Continuous tense, so the answer need to be V.ing'
-        // },
-        // {
-        //   question: 'What _____ (do) you do yesterday?',
-        //   description: 'In Past Simple Tense, you need to answer by Verb 2.'
-        // }
       ]
     },
     editItem (item) {

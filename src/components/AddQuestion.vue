@@ -6,12 +6,11 @@
         <v-btn flat>Manage Question</v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <v-content>       
+    <v-content>
       <v-layout align-start>
-        <v-btn color="orange darken-2" dark @click="back" >
-          <v-icon dark left
-            >arrow_back
-          </v-icon>Back
+        <v-btn color="orange darken-2"><router-link to="/ManageQuestion">Back</router-link>
+          <v-icon dark>
+          </v-icon>
         </v-btn>
       </v-layout>
       <v-layout align-center justify-center>
@@ -22,62 +21,48 @@
           ref="form"
           lazy-validation
         >
-          <v-list-tile>Question*</v-list-tile>        
+          <v-list-tile>Question*</v-list-tile>
             <v-text-field
               solo
               required
+              name="question"
+              v-model="question"
             ></v-text-field>
-          <v-list-tile>Questions Type*</v-list-tile> 
+          <v-list-tile>Questions Type*</v-list-tile>
             <v-radio-group row solo>
               <v-radio
                 label="Pre Test"
-                value="preTest"
+                value="1"
               ></v-radio>
               <v-radio
                 label="Exercise"
-                value="exercise"
+                value="2"
               ></v-radio>
               <v-radio
                 label="Post Test"
-                value="postTest"
+                value="3"
               ></v-radio>
           </v-radio-group>
-          <v-list-tile>Choice*</v-list-tile>
-            <v-layout align-center>
-              <v-text-field></v-text-field>
-                <v-checkbox
-                  label="True"
-                  value="True"
-                  class="shrink mr-2"
-                  v-model="checkbox"
-                  :rules="[v => !!v || 'You must agree to continue!']"
-                  required
-                ></v-checkbox>
-            </v-layout>
           <v-list-tile>Lesson*</v-list-tile>
             <v-select
               v-model="select"
               :items="items"
-              :rules="[v => !!v || 'Item is required']"
-              label="Item"
-              solo
-              required
-            ></v-select>
-          <v-list-tile>Sub Lesson*</v-list-tile>
-            <v-select
-              v-model="select"
-              :items="items"
-              :rules="[v => !!v || 'Item is required']"
-              label="Item"
+              item-text="lessonNo"
+              item-value="lessonNo"
+              :rules="[v => !!v || 'Lesson required']"
               solo
               required
             ></v-select>
           <v-list-tile>Description</v-list-tile>
             <v-textarea
             solo
-            name="input-7-4"
+            name="description"
+            v-model="description"
             counter="300"
           ></v-textarea>
+          <v-card-actions>
+                  <v-btn primary v-on:click="addQuestion()">Confirm</v-btn>
+          </v-card-actions>
         </v-form>
       </v-container>
     </v-content>
@@ -85,22 +70,46 @@
 </template>
 
 <script>
-  export default {
-    name: 'AddQuestion',
-    data: () => ({
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4'
-      ],
-      checkbox: false
-      }),
-      methods: {
-        back () {
-          alert('!')
-        }
+import axios from 'axios'
+export default {
+  name: 'AddQuestion',
+  data: () => ({
+    select: null,
+    items: []
+  }),
+  created () {
+    this.initialize()
+  },
+  methods: {
+    initialize () {
+      this.items = [
+        axios
+          .get('http://localhost:3003/lessonName')
+          .then(response => {
+            console.log(response)
+            this.items = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      ]
+    },
+    addQuestion () {
+      axios
+        .post('http://localhost:3003/questions', {
+          question: this.question,
+          questionType: this.questionType,
+          lessonNo: this.lessonNo,
+          description: this.description
+        })
+        .then(response => {
+          console.log(response)
+          console.log = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
+}
 </script>

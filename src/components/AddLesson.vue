@@ -22,7 +22,7 @@
           ref="form"
           lazy-validation
         >
-          <v-list-tile>Lesson*</v-list-tile>        
+          <v-list-tile>Lesson*</v-list-tile>
             <v-select
               v-model="select"
               :items="items"
@@ -40,7 +40,7 @@
               solo
               required
             ></v-text-field>
-          <v-list-tile>Deatail*</v-list-tile>
+          <v-list-tile>Detail*</v-list-tile>
             <v-textarea
             solo
             name="input-7-4"
@@ -53,18 +53,18 @@
 </template>
 
 <script>
-  export default {
-    name: 'AddLesson',
-    data: () => ({
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4'
-      ],
-      checkbox: false
-    }),
+export default {
+  name: 'AddLesson',
+  data: () => ({
+    select: null,
+    items: [
+      'Item 1',
+      'Item 2',
+      'Item 3',
+      'Item 4'
+    ],
+    checkbox: false
+  }),
   methods: {
 
   }

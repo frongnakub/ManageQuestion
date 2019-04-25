@@ -66,6 +66,52 @@ app.get('/questions', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
 })
 
+
+app.get('/lessonName', (req, res) => {
+    console.log("Fetching question")
+   
+    const connection = getConnection()
+
+    connection.query('SELECT lessonNo,lessonName from Lesson', 
+    function (error, rows, fields) {
+        if (error) { 
+            console.log(error) 
+            res.sendStatus(500)
+            throw error
+        };
+        console.log("I think we fetched successfully")
+        res.json(rows)
+    })
+    res.setHeader('Access-Control-Allow-Origin', '*');
+})
+
+app.post('/questions', (req, res) => {
+    console.log("Add questions")
+
+    const connection = getConnection()
+
+    connection.query('INSERT INTO Question(question,description,test_testNo,lesson_lessonNo) VALUES (?,?,?,?)', 
+    function (error, rows, fields) {
+        if (error) { 
+            console.log(error) 
+            res.sendStatus(500)
+            throw error
+        };
+        console.log("Add successfully")
+        res.json(rows)
+    })
+})
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header(
+        'Access-Control-Allow-Methods',
+        'POST, GET, PUT, PATCH, DELETE, OPTIONS'
+    );
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Option');
+    next();
+})
 // app.get('/choices', (req, res) => {
 //     console.log("Fetching question")
    
