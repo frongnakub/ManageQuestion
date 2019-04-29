@@ -158,7 +158,7 @@
           class="elevation-1">
           <template v-slot:items="props">
             <td >{{ props.item.lessonName }}</td>
-            <td >{{ props.item.subLesson }}</td>
+            <td >{{ props.item.subLessonName }}</td>
             <td >{{ props.item.testTypeName }}</td>
             <td class="text-xs-center">{{ props.item.question }}</td>
             <td class="text-xs-center">
@@ -199,7 +199,7 @@ export default {
     dialog: false,
     headers: [
       { text: 'Lesson', align: 'center', value: 'lessonName', sortable: false },
-      { text: 'Sub-Lesson', align: 'center', value: 'subLesson', sortable: false },
+      { text: 'Sub-Lesson', align: 'center', value: 'subLessonName', sortable: false },
       { text: 'Question for', align: 'center', value: 'testTypeName', sortable: false },
       { text: 'Question', align: 'center', value: 'question', sortable: false },
       { text: 'Actions', align: 'center', value: 'question', sortable: false }
@@ -210,7 +210,7 @@ export default {
       question: '',
       questionType: '',
       lessonName: '',
-      subLesson: '',
+      subLessonName: '',
       choices: '',
       description: ''
     },
@@ -218,7 +218,7 @@ export default {
       question: '',
       questionType: '',
       lessonName: '',
-      subLesson: '',
+      subLessonName: '',
       choices: '',
       description: ''
     },
