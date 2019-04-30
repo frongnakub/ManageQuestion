@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const mysql = require('mysql')
-
+const cors = require('cors')
 const bodyParser = require('body-parser')
 
 app.use(morgan('combined'))
@@ -10,6 +10,8 @@ app.use(morgan('combined'))
 app.use(bodyParser.urlencoded({
     extended: false
 }))
+app.use(bodyParser.json())
+app.use(cors())
 
 // app.post('/', (req, res) => {
 //     console.log("Trying to create a new question..")
@@ -48,12 +50,12 @@ router.get('/messages', (req, res) => {
 
 app.use(router)
 
-app.get('/questions', (req, res) => {
+app.get('/questions', cors(), (req, res) => {
     console.log("Fetching question")
    
     const connection = getConnection()
 
-    connection.query('SELECT question,description,lessonName,testTypeName FROM Question q join Lesson l on q.Lesson_LessonNo = l.LessonNo join Test t on q.test_testno = t.testno join TestType tt on t.testType_TestTypeNo = tt.testTypeNo', 
+    connection.query('SELECT question,description,lessonName,testTypeName,subLessonName FROM Question q join Lesson l on q.Lesson_LessonNo = l.LessonNo join Test t on q.test_testno = t.testno join TestType tt on t.testType_TestTypeNo = tt.testTypeNo join SubLesson s on q.subLessonNo = s.subLessonNo', 
     function (error, rows, fields) {
         if (error) { 
             console.log(error) 
@@ -67,7 +69,7 @@ app.get('/questions', (req, res) => {
 })
 
 
-app.get('/lessonName', (req, res) => {
+app.get('/lessonName', cors(), (req, res) => {
     console.log("Fetching question")
    
     const connection = getConnection()
@@ -85,12 +87,11 @@ app.get('/lessonName', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
 })
 
-app.post('/questions', (req, res) => {
+app.post('/question',cors(), (req, res) => {
     console.log("Add questions")
-
+    console.log(req.body.question)
     const connection = getConnection()
-
-    connection.query('INSERT INTO Question(question,description,test_testNo,lesson_lessonNo) VALUES (?,?,?,?)', 
+    connection.query('INSERT INTO Question(question,description,test_testNo,lesson_lessonNo) VALUES ("' + req.body.question + '","' + req.body.description + '",' + req.body.test_testNo + ',' + req.body.lesson_lessonNo + ')', 
     function (error, rows, fields) {
         if (error) { 
             console.log(error) 

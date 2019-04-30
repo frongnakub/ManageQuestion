@@ -21,45 +21,14 @@
           ref="form"
           lazy-validation
         >
-          <v-list-tile>Question*</v-list-tile>
-            <v-text-field
-              solo
-              required
-              name="question"
-              v-model="question"
-            ></v-text-field>
-          <v-list-tile>Questions Type*</v-list-tile>
-            <v-radio-group row solo>
-              <v-radio
-                label="Pre Test"
-                value="1"
-              ></v-radio>
-              <v-radio
-                label="Exercise"
-                value="2"
-              ></v-radio>
-              <v-radio
-                label="Post Test"
-                value="3"
-              ></v-radio>
-          </v-radio-group>
-          <v-list-tile>Lesson*</v-list-tile>
-            <v-select
-              v-model="select"
-              :items="items"
-              item-text="lessonNo"
-              item-value="lessonNo"
-              :rules="[v => !!v || 'Lesson required']"
-              solo
-              required
-            ></v-select>
-          <v-list-tile>Description</v-list-tile>
-            <v-textarea
-            solo
-            name="description"
-            v-model="description"
-            counter="300"
-          ></v-textarea>
+          <input type="text" v-model="question" placeholder="Question">
+          <p> Question is {{question}}</p>
+          <textarea v-model="description" placeholder="Description"></textarea>
+          <p> Description is {{description}}</p>
+          <input type="number" v-model="test_testNo" placeholder="testNo" >
+          <p> TestNo is {{test_testNo}}</p>
+          <input type="number" v-model="lesson_lessonNo" placeholder="lessonNo" >
+          <p> Lesson is {{lesson_lessonNo}}</p>
           <v-card-actions>
                   <v-btn primary v-on:click="addQuestion()">Confirm</v-btn>
           </v-card-actions>
@@ -75,7 +44,11 @@ export default {
   name: 'AddQuestion',
   data: () => ({
     select: null,
-    items: []
+    items: [],
+    question: '',
+    description: '',
+    test_testNo: Number,
+    lesson_lessonNo: Number
   }),
   created () {
     this.initialize()
@@ -96,15 +69,18 @@ export default {
     },
     addQuestion () {
       axios
-        .post('http://localhost:3003/questions', {
+        .post('http://localhost:3003/question', {
           question: this.question,
-          questionType: this.questionType,
-          lessonNo: this.lessonNo,
-          description: this.description
+          description: this.description,
+          test_testNo: Number(this.test_testNo),
+          lesson_lessonNo: Number(this.lesson_lessonNo),
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
         })
         .then(response => {
           console.log(response)
-          console.log = response.data
+          this.items = response.data
         })
         .catch(error => {
           console.log(error)
