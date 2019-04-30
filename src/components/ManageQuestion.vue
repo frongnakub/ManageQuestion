@@ -1,22 +1,28 @@
 <template>
-  <v-app >
+  <v-app light class="teal lighten-4">
     <v-content>
     <v-container>
         <v-dialog v-model="dialog" max-width="100%">
         <template v-slot:activator="{ on }">
-        <v-btn v-on="on" align-center justify-end><router-link to="/AddQuestion">Add New Question</router-link></v-btn>
           <v-text-field
             v-model="search"
             label="Search"
             single-line
             hide-details
+            solo
           ></v-text-field>
+          <v-container>
+            <v-layout justify-end>
+              <v-btn v-on="on" ><router-link to="/AddQuestion">Add New Question</router-link></v-btn>
+            </v-layout>
+          </v-container>
         </template>
         </v-dialog>
         <v-data-table
           :headers="headers"
           :items="questions"
           :search="search"
+          :loading="loading"
           class="elevation-1">
           <template v-slot:items="props">
             <td >{{ props.item.lessonName }}</td>

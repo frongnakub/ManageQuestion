@@ -17,15 +17,8 @@
           lazy-validation
         >
           <v-list-tile>Lesson*</v-list-tile>
-            <v-select
-              v-model="select"
-              :items="items"
-              :rules="[v => !!v || 'Item is required']"
-              label="Item"
-              solo
-              required
-            ></v-select>
             <v-text-field
+              v-model="lesson"
               solo
               required
             ></v-text-field>
@@ -40,6 +33,9 @@
             name="input-7-4"
             counter="300"
           ></v-textarea>
+          <v-card-actions class="justify-end">
+            <v-btn primary v-on:click="addQuestion()">Confirm</v-btn>
+          </v-card-actions>
         </v-form>
       </v-container>
     </v-content>
@@ -48,25 +44,9 @@
 
 <script>
 export default {
-
-}
-</script>
-
-<style>
-
-</style>
-
-<script>
-export default {
   name: 'AddLesson',
   data: () => ({
     select: null,
-    items: [
-      'Item 1',
-      'Item 2',
-      'Item 3',
-      'Item 4'
-    ],
     checkbox: false
   }),
   methods: {

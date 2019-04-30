@@ -1,38 +1,88 @@
 <template>
   <v-app id="web">
-    <v-toolbar color="cyan" fixed app clipped-left>
-      <v-toolbar-items >
-        <v-btn flat><router-link to="/ManageLesson">Manage Lesson</router-link></v-btn>
-        <v-btn flat>Manage Question</v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
     <v-content>
-      <v-layout align-start>
+      <!--<v-layout align-start>
         <v-btn color="orange darken-2"><router-link to="/ManageQuestion">Back</router-link>
           <v-icon dark>
           </v-icon>
         </v-btn>
-      </v-layout>
+      </v-layout>-->
+      <v-container>
       <v-layout align-center justify-center>
         <span class="headline" >Add Question</span>
       </v-layout>
-      <v-container>
+        <v-container>
         <v-form
           ref="form"
           lazy-validation
         >
-          <input type="text" v-model="question" placeholder="Question">
-          <p> Question is {{question}}</p>
-          <textarea v-model="description" placeholder="Description"></textarea>
-          <p> Description is {{description}}</p>
-          <input type="number" v-model="test_testNo" placeholder="testNo" >
-          <p> TestNo is {{test_testNo}}</p>
-          <input type="number" v-model="lesson_lessonNo" placeholder="lessonNo" >
-          <p> Lesson is {{lesson_lessonNo}}</p>
-          <v-card-actions>
-                  <v-btn primary v-on:click="addQuestion()">Confirm</v-btn>
+          <v-select
+            label="Select Lesson*"
+            autocomplete
+            :loading="loading"
+            v-model="lesson_lessonNo"
+            box
+          ></v-select>
+          <v-select
+            label="Select Sub-Lesson*"
+            autocomplete
+            :loading="loading"
+            v-model="lesson_lessonNo"
+            box
+          ></v-select>
+          <v-text-field
+            label="Question*"
+            v-model="question"
+            required
+            box                        
+          ></v-text-field>
+          <v-text-field
+            label="Question for*"
+            v-model="questionType"
+            required
+            box                        
+          ></v-text-field>
+          <v-radio-group v-model="trueChoice" :mandatory="false"> 
+            <v-radio label="True" value="choice1">
+            </v-radio>
+              <v-text-field
+              v-model="choice1"
+              required
+              box                        
+              ></v-text-field>
+            <v-radio label="True" value="choice2">
+            </v-radio>
+              <v-text-field
+              v-model="choice2"
+              required
+              box                        
+              ></v-text-field>
+            <v-radio label="True" value="choice3">
+            </v-radio>
+              <v-text-field
+              v-model="choice3"
+              required
+              box                        
+              ></v-text-field>
+            <v-radio label="True" value="choice4">
+            </v-radio>
+              <v-text-field
+              v-model="choice4"
+              required
+              box                        
+              ></v-text-field>
+          </v-radio-group>
+          <v-textarea
+              label="Description"
+              v-model="description"
+              required
+              box       
+          ></v-textarea>
+          <v-card-actions class="justify-end">
+            <v-btn primary v-on:click="addQuestion()">Confirm</v-btn>
           </v-card-actions>
         </v-form>
+      </v-container>
       </v-container>
     </v-content>
   </v-app>
@@ -48,7 +98,7 @@ export default {
     question: '',
     description: '',
     test_testNo: Number,
-    lesson_lessonNo: Number
+    lesson_lessonNo: ''
   }),
   created () {
     this.initialize()
