@@ -39,7 +39,7 @@
         </v-form>
       </v-container>
     </v-content>
-  </v-app>  
+  </v-app>
 </template>
 
 <script>

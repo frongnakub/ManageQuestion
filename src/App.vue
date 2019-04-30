@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-toolbar color="teal darken-4" fixed app clipped-left v-if="authenticated">
-      <v-toolbar-items>
-        <v-btn flat ><router-link to="/ManageLesson">Manage Lesson</router-link></v-btn>
+    <v-toolbar color="cyan" fixed app clipped-left v-if="authenticated">
+      <v-toolbar-items >
+        <v-btn flat><router-link to="/ManageLesson">Manage Lesson</router-link></v-btn>
         <v-btn  flat><router-link to="/ManageQuestion">Manage Question</router-link></v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
@@ -18,7 +18,6 @@
       <span class="black--text" >SIT KMUTT&copy; 2019</span>
     </v-footer>
   </div>
-  
   <!--<div id="app">
       <div id = "logout">
         <router-link v-if="authenticated" to="/" v-on:click.native="logout()" replace>Logout</router-link>

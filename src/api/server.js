@@ -35,7 +35,7 @@ app.use(cors())
 
 function getConnection(){
     return mysql.createConnection({
-        host: '34.221.181.184',
+        host: '54.202.16.189',
         user: 'proj',
         password: 'Oui_plic2',
         database: 'GrammarBE'
@@ -87,9 +87,31 @@ app.get('/lessonName', cors(), (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
 })
 
+app.get('/testName', cors(), (req, res) => {
+    console.log("Fetching question")
+   
+    const connection = getConnection()
+
+    connection.query('SELECT testTypeNo,testTypeName from Test t join TestType tt on t.testType_testTypeNo = tt.testTypeNo', 
+    function (error, rows, fields) {
+        if (error) { 
+            console.log(error) 
+            res.sendStatus(500)
+            throw error
+        };
+        console.log("I think we fetched successfully")
+        res.json(rows)
+    })
+    res.setHeader('Access-Control-Allow-Origin', '*');
+})
+
+
 app.post('/question',cors(), (req, res) => {
     console.log("Add questions")
     console.log(req.body.question)
+    console.log(req.body.description)
+    console.log(req.body.test_testNo)
+    console.log(req.body.lesson_lessonNo)
     const connection = getConnection()
     connection.query('INSERT INTO Question(question,description,test_testNo,lesson_lessonNo) VALUES ("' + req.body.question + '","' + req.body.description + '",' + req.body.test_testNo + ',' + req.body.lesson_lessonNo + ')', 
     function (error, rows, fields) {

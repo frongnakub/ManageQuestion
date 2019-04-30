@@ -16,67 +16,76 @@
           ref="form"
           lazy-validation
         >
+          <v-list-tile><h3>- Lesson</h3></v-list-tile>
           <v-select
-            label="Select Lesson*"
-            autocomplete
-            :loading="loading"
-            v-model="lesson_lessonNo"
-            box
-          ></v-select>
-          <v-select
+              v-model="lesson_lessonNo"
+              :items="lessons"
+              item-text="lessonName"
+              item-value="lessonNo"
+              :rules="[v => !!v || 'Lesson required']"
+              box
+              required
+            ></v-select>
+          <!-- <v-select
             label="Select Sub-Lesson*"
             autocomplete
             :loading="loading"
             v-model="lesson_lessonNo"
             box
-          ></v-select>
+          ></v-select> -->
+          <v-list-tile><h3>- Question</h3></v-list-tile>
           <v-text-field
             label="Question*"
             v-model="question"
             required
-            box                        
+            box
           ></v-text-field>
-          <v-text-field
-            label="Question for*"
-            v-model="questionType"
-            required
-            box                        
-          ></v-text-field>
-          <v-radio-group v-model="trueChoice" :mandatory="false"> 
+          <v-list-tile><h3>- Question for</h3></v-list-tile>
+          <v-select
+              v-model="test_testNo"
+              :items="tests"
+              item-text="testTypeName"
+              item-value="testTypeNo"
+              :rules="[v => !!v || 'Test required']"
+              box
+              required
+            ></v-select>
+          <!-- <v-radio-group v-model="trueChoice" :mandatory="false">
             <v-radio label="True" value="choice1">
             </v-radio>
               <v-text-field
               v-model="choice1"
               required
-              box                        
+              box
               ></v-text-field>
             <v-radio label="True" value="choice2">
             </v-radio>
               <v-text-field
               v-model="choice2"
               required
-              box                        
+              box
               ></v-text-field>
             <v-radio label="True" value="choice3">
             </v-radio>
               <v-text-field
               v-model="choice3"
               required
-              box                        
+              box
               ></v-text-field>
             <v-radio label="True" value="choice4">
             </v-radio>
               <v-text-field
               v-model="choice4"
               required
-              box                        
+              box
               ></v-text-field>
-          </v-radio-group>
+          </v-radio-group> -->
+          <v-list-tile><h3>- Description</h3></v-list-tile>
           <v-textarea
               label="Description"
               v-model="description"
               required
-              box       
+              box
           ></v-textarea>
           <v-card-actions class="justify-end">
             <v-btn primary v-on:click="addQuestion()">Confirm</v-btn>
@@ -94,23 +103,24 @@ export default {
   name: 'AddQuestion',
   data: () => ({
     select: null,
-    items: [],
+    lessons: [],
     question: '',
     description: '',
     test_testNo: Number,
-    lesson_lessonNo: ''
+    lesson_lessonNo: Number
   }),
   created () {
     this.initialize()
+    this.testName()
   },
   methods: {
     initialize () {
-      this.items = [
+      this.lessons = [
         axios
           .get('http://localhost:3003/lessonName')
           .then(response => {
             console.log(response)
-            this.items = response.data
+            this.lessons = response.data
           })
           .catch(error => {
             console.log(error)
@@ -135,6 +145,19 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    testName () {
+      this.tests = [
+        axios
+          .get('http://localhost:3003/testName')
+          .then(response => {
+            console.log(response)
+            this.tests = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      ]
     }
   }
 }
