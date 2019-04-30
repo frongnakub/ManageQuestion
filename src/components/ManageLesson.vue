@@ -1,12 +1,5 @@
 <template>
   <v-app>
-    <v-toolbar color="cyan" fixed app clipped-left>
-      <v-toolbar-items >
-        <v-btn flat >Manage Lesson</v-btn>
-        <v-btn flat><router-link to="/ManageQuestion">Manage Question</router-link></v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
-
     <v-content>
     <v-parallax
       src="https://wallpapercave.com/wp/wp2499654.jpg"

@@ -1,11 +1,5 @@
 <template>
-  <v-app id="web">
-    <v-toolbar color="cyan" fixed app clipped-left>
-      <v-toolbar-items >
-        <v-btn flat >Manage Lesson</v-btn>
-        <v-btn flat><router-link to="/ManageQuestion">Manage Question</router-link></v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
+  <v-app>
     <v-content>
       <v-layout align-start>
         <v-btn color="orange darken-2" dark @click="back" >
@@ -49,8 +43,18 @@
         </v-form>
       </v-container>
     </v-content>
-  </v-app>
+  </v-app>  
 </template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
 
 <script>
 export default {

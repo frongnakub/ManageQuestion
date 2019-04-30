@@ -1,5 +1,5 @@
 <template>
-    <v-app id="web">
+    <v-app>
       <v-content>
         <v-container fluid fill-height>
           <v-layout align-center justify-center>

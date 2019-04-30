@@ -1,20 +1,7 @@
 <template>
-  <v-app id="web">
-    <v-toolbar color="cyan" dark fixed app clipped-left>
-      <v-toolbar-items >
-        <v-btn flat ><router-link to="/ManageLesson">Manage Lesson</router-link></v-btn>
-        <v-btn flat>Manage Question</v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
-
+  <v-app >
     <v-content>
-    <v-parallax
-      src="https://wallpapercave.com/wp/wp2499654.jpg"
-    >
     <v-container>
-      <!--<v-dialog v-model="dialog" max-width="100%">
-      <template v-slot:activator="{ on }">
-        <v-btn v-on="on" align-center justify-end>Add New Question</v-btn>-->
         <v-dialog v-model="dialog" max-width="100%">
         <template v-slot:activator="{ on }">
         <v-btn v-on="on" align-center justify-end><router-link to="/AddQuestion">Add New Question</router-link></v-btn>
@@ -26,131 +13,6 @@
           ></v-text-field>
         </template>
         </v-dialog>
-        <!--</template>-->
-      <!--<v-card >
-        <v-card-title>
-          <span class="headline">{{ formTitle }}</span>
-        </v-card-title>
-          <v-card-text >
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12>
-                  <v-list-tile>Question*</v-list-tile>
-                  <v-text-field
-                    v-model="editedItem.question"
-                    solo
-                    :rules="[rules.lengthQ(),]"
-                  ></v-text-field>
-                </v-flex>
-                 <v-flex xs12>
-                  <v-list-tile >Questions Type*</v-list-tile>
-                  <v-radio-group row v-model="editedItem.questionType" >
-                    <v-radio
-                      label="Pre Test"
-                      value="preTest"
-                    ></v-radio>
-                    <v-radio
-                      label="Exercise"
-                      value="exercise"
-                    ></v-radio>
-                    <v-radio
-                      label="Post Test"
-                      value="postTest"
-                    ></v-radio>
-                  </v-radio-group>
-                </v-flex> -->
-                <!--<v-flex xs12>
-                  <v-list-tile>Choice*</v-list-tile>
-                  <v-layout align-center>
-                    <v-text-field v-model="editedItem.choice" solo></v-text-field>
-                    <v-checkbox
-                      v-model="editedItem.choiceDescripition"
-                      label="True"
-                      value="True"
-                      class="shrink mr-2"
-                    ></v-checkbox>
-                  </v-layout>
-                  <v-layout align-center>
-                    <v-text-field v-model="editedItem.choice" solo></v-text-field>
-                    <v-checkbox
-                      v-model="editedItem.choiceDescripition"
-                      label="True"
-                      value="True"
-                      class="shrink mr-2"
-                    ></v-checkbox>
-                  </v-layout>
-                  <v-layout align-center>
-                    <v-text-field v-model="editedItem.choice" solo></v-text-field>
-                    <v-checkbox
-                      v-model="editedItem.choiceDescripition"
-                      label="True"
-                      value="True"
-                      class="shrink mr-2"
-                    ></v-checkbox>
-                  </v-layout>
-                  <v-layout align-center>
-                    <v-text-field v-model="editedItem.choice" solo></v-text-field>
-                    <v-checkbox
-                      v-model="editedItem.choiceDescripition"
-                      label="True"
-                      value="True"
-                      class="shrink mr-2"
-                    ></v-checkbox>
-                  </v-layout>
-                </v-flex>
-                <v-flex xs12>
-                  <v-list-tile>Lesson*</v-list-tile>
-                  <v-select
-                    solo
-                    v-model="editedItem.lesson"
-                    :items="lessonName"
-                    label="Lesson"
-                  ></v-select>
-                </v-flex>
-               <v-flex xs12>
-                  <v-list-tile>Sub-Lesson*</v-list-tile>
-                  <v-select
-                    solo
-                    v-model="editedItem.subLesson"
-                    :items="SubLesson"
-                    label="Sub-Lesson"
-                  ></v-select>
-                </v-flex>
-                <v-flex xs12>
-                  <v-list-tile>Description</v-list-tile>
-                  <v-textarea
-                  solo
-                  name="input-7-4"
-                  v-model="editedItem.description"
-                  :rules="[rules.lengthD()]"
-                  counter="300"
-                  ></v-textarea>
-                </v-flex>
-                 <v-flex xs12>
-                  <v-list-tile>Choices</v-list-tile>
-                  <v-textarea
-                  solo
-                  name="input-7-4"
-                  v-model="editedItem.choices"
-                  :rules="[rules.lengthD()]"
-                  counter="300"
-                  ></v-textarea>
-                </v-flex>
-            </v-layout>
-            </v-container>
-          </v-card-text>
-        <v-divider></v-divider>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-            :disabled="!v"
-            :loading="isLoading"
-            depressed
-          </v-card-actions>
-        </v-card>
-      </v-dialog>-->
-
         <v-data-table
           :headers="headers"
           :items="questions"
@@ -182,11 +44,7 @@
           </v-alert>
         </v-data-table>
     </v-container>
-    </v-parallax>
     </v-content>
-    <v-footer >
-      <span class="black--text" >SIT KMUTT&copy; 2019</span>
-    </v-footer>
   </v-app>
 </template>
 
