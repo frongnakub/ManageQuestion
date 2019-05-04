@@ -50,36 +50,6 @@
               box
               required
             ></v-select>
-          <!-- <v-radio-group v-model="trueChoice" :mandatory="false">
-            <v-radio label="True" value="choice1">
-            </v-radio>
-              <v-text-field
-              v-model="choice1"
-              required
-              box
-              ></v-text-field>
-            <v-radio label="True" value="choice2">
-            </v-radio>
-              <v-text-field
-              v-model="choice2"
-              required
-              box
-              ></v-text-field>
-            <v-radio label="True" value="choice3">
-            </v-radio>
-              <v-text-field
-              v-model="choice3"
-              required
-              box
-              ></v-text-field>
-            <v-radio label="True" value="choice4">
-            </v-radio>
-              <v-text-field
-              v-model="choice4"
-              required
-              box
-              ></v-text-field>
-          </v-radio-group> -->
           <v-list-tile><h3>- Description</h3></v-list-tile>
           <v-textarea
               label="Description"

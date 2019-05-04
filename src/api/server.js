@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const mysql = require('mysql')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const debug = require('debug')('ManadeQuestion:server.js');
+const debug = require('debug')('ManageQuestion:server.js');
 const http = require('http');
 
 const port = normalizePort(process.env.PORT || '3003');
@@ -40,7 +40,7 @@ app.get('/questions', cors(), (req, res) => {
    
     const connection = getConnection()
 
-    connection.query('SELECT question,description,lessonName,testTypeName,subLessonName FROM Question q join Lesson l on q.Lesson_LessonNo = l.LessonNo join Test t on q.test_testno = t.testno join TestType tt on t.testType_TestTypeNo = tt.testTypeNo join SubLesson s on q.subLessonNo = s.subLessonNo', 
+    connection.query('SELECT questionNo,question,description,lessonName,testTypeName,subLessonName FROM Question q join Lesson l on q.Lesson_LessonNo = l.LessonNo join Test t on q.test_testno = t.testno join TestType tt on t.testType_TestTypeNo = tt.testTypeNo join SubLesson s on q.subLessonNo = s.subLessonNo', 
     function (error, rows, fields) {
         if (error) { 
             console.log(error) 
@@ -90,6 +90,24 @@ app.get('/testName', cors(), (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
 })
 
+app.get('/question', cors(), (req, res) => {
+  console.log("Fetching question")
+ 
+  const connection = getConnection()
+
+  connection.query('SELECT questionNo, question from Question', 
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(500)
+          throw error
+      };
+      console.log("I think we fetched successfully")
+      res.json(rows)
+  })
+  res.setHeader('Access-Control-Allow-Origin', '*');
+})
+
 
 app.post('/question',cors(), (req, res) => {
     console.log("Add questions")
@@ -108,6 +126,24 @@ app.post('/question',cors(), (req, res) => {
         console.log("Add successfully")
         res.json(rows)
     })
+})
+
+app.post('/choices',cors(), (req, res) => {
+  console.log("Add choices")
+  console.log(req.body.choices)
+  console.log(req.body.choiceType)
+  console.log(req.body.question_questionNo)
+  const connection = getConnection()
+  connection.query('INSERT INTO Choice(choices,choiceType,question_questionNo) VALUES ("' + req.body.choices + '","' + req.body.choiceType + '",' + req.body.question_questionNo + ')', 
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(500)
+          throw error
+      };
+      console.log("Add choices successfully")
+      res.json(rows)
+  })
 })
 
 app.use((req, res, next) => {

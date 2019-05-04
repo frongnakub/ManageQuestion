@@ -14,6 +14,7 @@
           <v-container>
             <v-layout justify-end>
               <v-btn v-on="on" ><router-link to="/AddQuestion">Add New Question</router-link></v-btn>
+              <v-btn v-on="on" ><router-link to="/AddChoice">Add Choices</router-link></v-btn>
             </v-layout>
           </v-container>
         </template>
@@ -25,9 +26,9 @@
           :loading="loading"
           class="elevation-1">
           <template v-slot:items="props">
-            <td >{{ props.item.lessonName }}</td>
-            <td >{{ props.item.subLessonName }}</td>
-            <td >{{ props.item.testTypeName }}</td>
+            <td class="text-xs-center">{{ props.item.lessonName }}</td>
+            <td class="text-xs-center">{{ props.item.subLessonName }}</td>
+            <td class="text-xs-center">{{ props.item.testTypeName }}</td>
             <td class="text-xs-center">{{ props.item.question }}</td>
             <td class="text-xs-center">
               <v-icon

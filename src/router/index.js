@@ -13,6 +13,7 @@ import ManageQuestion from '@/components/ManageQuestion'
 import ManageLesson from '@/components/ManageLesson'
 import AddQuestion from '@/components/AddQuestion'
 import AddLesson from '@/components/AddLesson'
+import AddChoice from '@/components/AddChoice'
 
 Vue.use(Router)
 Vue.use(Vuetify)
@@ -50,6 +51,11 @@ export default new Router({
       path: '/AddLesson',
       name: 'addLesson',
       component: AddLesson
+    },
+    {
+      path: '/AddChoice',
+      name: 'addChoice',
+      component: AddChoice
     }
   ]
 })
