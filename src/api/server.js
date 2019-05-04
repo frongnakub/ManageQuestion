@@ -4,6 +4,11 @@ const morgan = require('morgan')
 const mysql = require('mysql')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const debug = require('debug')('ManadeQuestion:server.js');
+const http = require('http');
+
+const port = normalizePort(process.env.PORT || '3003');
+app.set('port', port);
 
 app.use(morgan('combined'))
 
@@ -13,29 +18,9 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use(cors())
 
-// app.post('/', (req, res) => {
-//     console.log("Trying to create a new question..")
-//     console.log("How do we get data?")
-    
-//     console.log("First name : " + req.body.create_first_name)
-//     const firstName = req.body.create_first_name
-//     const lastName = req.body.create_last_name
-    
-//     getConnection().query('INSERT INTO users(first_name, last_name) VALUES (?, ?)', function (error, results, fields) {
-//         if (error) { 
-//             console.log(error) 
-//             res.sendStatus(500)
-//             return
-//         }
-        
-//         console.log("Insert a new user with id: ", results.insertId);
-//         res.end()
-//     })
-// })
-
 function getConnection(){
     return mysql.createConnection({
-        host: '54.202.16.189',
+        host: '54.188.28.47',
         user: 'proj',
         password: 'Oui_plic2',
         database: 'GrammarBE'
@@ -157,15 +142,69 @@ app.get("/", (req, res) => {
     res.send("Hello from ROOT")
 })
 
-app.get("/users", (req, res) => {
-    var user1 = {firstName : "Stephen", lastName: "Curry"}
-    const user2 = {firstName : "Kevin", lastName: "Durant"}
-    res.json([user1,user2])
-
-    //res.send("Nodemon auto updates when I save this file")
-})
-
 //localhost:3003
-app.listen(3003, () => {
-    console.log("Server is up and listening on 3003...")
-})
+app.listen(port, function () {
+    console.log('Server running at http://localhost:' + port);
+  });
+  app.on('error', onError);
+  app.on('listening', onListening);
+  
+  /**
+   * Normalize a port into a number, string, or false.
+   */
+  
+  function normalizePort(val) {
+    var port = parseInt(val, 10);
+  
+    if (isNaN(port)) {
+      // named pipe
+      return val;
+    }
+  
+    if (port >= 0) {
+      // port number
+      return port;
+    }
+  
+    return false;
+  }
+  
+  /**
+   * Event listener for HTTP server.js "error" event.
+   */
+  
+  function onError(error) {
+    if (error.syscall !== 'listen') {
+      throw error;
+    }
+  
+    var bind = typeof port === 'string'
+      ? 'Pipe ' + port
+      : 'Port ' + port;
+  
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+      case 'EACCES':
+        console.error(bind + ' requires elevated privileges');
+        process.exit(1);
+        break;
+      case 'EADDRINUSE':
+        console.error(bind + ' is already in use');
+        process.exit(1);
+        break;
+      default:
+        throw error;
+    }
+  }
+  
+  /**
+   * Event listener for HTTP server.js "listening" event.
+   */
+  
+  function onListening() {
+    var addr = server.address();
+    var bind = typeof addr === 'string'
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
+    debug('Listening on ' + bind);
+  }
