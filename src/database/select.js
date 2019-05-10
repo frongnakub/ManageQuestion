@@ -1,5 +1,5 @@
 let mysql = require('mysql')
-var connection = require('./connect') //Connection module
+const connection = require('./connect') //Connection module
 
 //Query
 let sql = 'SELECT * FROM Question'

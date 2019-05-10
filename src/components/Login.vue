@@ -1,37 +1,33 @@
 <template>
-  <div class="login">
-    <div class="logins">
-      <div class="main">
-        <div class="form-w3agile">
-          <h2>Please Login</h2>
-          <div id="use">
-          </div>
-          <div class="key">
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-            <input type="text" name="username" v-model="input.username" placeholder="Username"><br><br><br>
-            <div class="clearfix"></div>
-          </div>
-          <div id="pass">
-          </div>
-          <div class="key">
-            <i class="fa fa-lock" aria-hidden="true"></i>
-            <input type="password" name="password" v-model="input.password" placeholder="Password"><br><br>
-            <div class="cle arfix"></div>
-          </div>
-          <br>
-          <div class="submit">
-            <button type="button" v-on:click="login()">Login</button>
-          </div>
-        </div>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-  </div>
+    <v-app>
+      <v-content>
+        <v-container fluid fill-height>
+          <v-layout align-center justify-center>
+            <v-flex xs12 sm8 md4>
+              <v-card class="elevation-12">
+                <v-toolbar dark color="primary">
+                  <v-toolbar-title>Please Login</v-toolbar-title>
+                </v-toolbar>
+                <v-card-text>
+                <v-form>
+                <v-text-field prepend-icon="person" name="Username" label="Username" v-model="input.username"></v-text-field>
+                <v-text-field prepend-icon="lock" name="Password" label="Password" type="password" v-model="input.password"></v-text-field>
+                <v-card-actions>
+                  <v-btn primary large block v-on:click="login()">Login</v-btn>
+                </v-card-actions>
+                </v-form>
+                </v-card-text>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-content>
+    </v-app>
 </template>
 
 <script>
 export default {
-  name: '',
+  name: 'Login',
   data () {
     return {
       input: {
@@ -48,7 +44,7 @@ export default {
           this.input.password === this.$parent.mockAccount.password
         ) {
           this.$emit('authenticated', true)
-          this.$router.replace({ name: 'manageQuestion' })
+          this.$router.replace({ name: 'manageLesson' })
         } else {
           console.log('The username and / or password is incorrect')
         }

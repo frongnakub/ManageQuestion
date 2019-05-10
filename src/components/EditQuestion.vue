@@ -57,7 +57,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'AddQuestion',
+  name: 'EditQuestion',
   data: () => ({
     select: null,
     lessons: [],

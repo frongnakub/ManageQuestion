@@ -1,14 +1,17 @@
 import Vue from 'vue'
+//import Vuex from 'vuex'
 import Router from 'vue-router'
 import Vuetify from 'vuetify'
-import Vuelidate from 'vuelidate'
+//import Vuelidate from 'vuelidate'
+//import Vueditor from 'vueditor'
 import 'vuetify/dist/vuetify.min.css'
 import 'vuetify/src/stylus/app.styl'
 import '@mdi/font/css/materialdesignicons.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import 'font-awesome/css/font-awesome.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
-import TestVuetify from '@/components/TestVuetify'
+import 'vueditor/dist/style/vueditor.min.css'
+import Login from '@/components/Login'
 import ManageQuestion from '@/components/ManageQuestion'
 import ManageLesson from '@/components/ManageLesson'
 import AddQuestion from '@/components/AddQuestion'
@@ -17,20 +20,22 @@ import AddChoice from '@/components/AddChoice'
 
 Vue.use(Router)
 Vue.use(Vuetify)
-Vue.use(Vuelidate)
+//Vue.use(Vuelidate)
+//Vue.use(Vueditor)
+//Vue.use(Vuex)
 
 export default new Router({
   routes: [
     {
       path: '/',
       redirect: {
-        name: 'TestVuetify'
+        name: 'Login'
       }
     },
     {
-      path: '/TestVuetify',
-      name: 'TestVuetify',
-      component: TestVuetify
+      path: '/Login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/ManageQuestion',

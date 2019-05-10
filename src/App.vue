@@ -2,13 +2,12 @@
   <div>
     <v-toolbar color="cyan" fixed app clipped-left v-if="authenticated">
       <v-toolbar-items >
-        <v-btn flat><router-link to="/ManageLesson">Manage Lesson</router-link></v-btn>
-        <v-btn  flat><router-link to="/ManageQuestion">Manage Question</router-link></v-btn>
+        <v-btn flat to="/ManageLesson">Manage Lesson</v-btn>
+        <v-btn flat to="/ManageQuestion">Manage Question</v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn flat >
-        <router-link to="/" v-on:click.native="logout()" replace>Logout</router-link>
+        <v-btn flat to="/" v-on:click.native="logout()" replace>Logout
        </v-btn>
       </v-toolbar-items>
 
@@ -18,12 +17,7 @@
       <span class="black--text" >SIT KMUTT&copy; 2019</span>
     </v-footer>
   </div>
-  <!--<div id="app">
-      <div id = "logout">
-        <router-link v-if="authenticated" to="/" v-on:click.native="logout()" replace>Logout</router-link>
-      </div>
-    <router-view @authenticated ="setAuthenticated"/>
-  </div>-->
+
 </template>
 
 <script>
@@ -40,7 +34,7 @@ export default {
   },
   mounted () {
     if (!this.authenticated) {
-      this.$router.replace({name: 'TestVuetify'})
+      this.$router.replace({name: 'Login'})
     }
   },
   methods: {

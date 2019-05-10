@@ -1,16 +1,11 @@
 <template>
   <v-app>
     <v-content>
-      <v-layout align-start>
-        <v-btn color="orange darken-2" dark @click="back" >
-          <v-icon dark left
-            >arrow_back
-          </v-icon>Back
-        </v-btn>
-      </v-layout>
-      <v-layout align-center justify-center>
-        <span class="headline" >Add Lesson</span>
-      </v-layout>
+      <v-container>
+        <v-layout align-center justify-center>
+          <span class="headline" >Add Lesson</span>
+        </v-layout>
+      </v-container>
       <v-container>
         <v-form
           ref="form"
@@ -34,14 +29,14 @@
             counter="300"
           ></v-textarea>
           <v-card-actions class="justify-end">
-            <v-btn primary v-on:click="addQuestion()">Confirm</v-btn>
+            <v-btn primary v-on:click="close()" >Cancle</v-btn>
+            <v-btn primary v-on:click="addQuestion()" color="red darken-2">Confirm</v-btn>
           </v-card-actions>
         </v-form>
       </v-container>
     </v-content>
   </v-app>
 </template>
-
 <script>
 export default {
   name: 'AddLesson',
@@ -50,7 +45,24 @@ export default {
     checkbox: false
   }),
   methods: {
+    close () {
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+        this.$router.replace({ name: 'manageLesson' })
+      }, 300)
+    },
 
+    addQuestion () {
+      //if (this.editedIndex > -1) {
+      //  Object.assign(this.questions[this.editedIndex], this.editedItem)
+      //} else {
+      //  this.questions.push(this.editedItem)
+      //}
+      this.close()
+    }
   }
 }
 </script>
+

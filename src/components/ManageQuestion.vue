@@ -13,8 +13,8 @@
           ></v-text-field>
           <v-container>
             <v-layout justify-end>
-              <v-btn v-on="on" ><router-link to="/AddQuestion">Add New Question</router-link></v-btn>
-              <v-btn v-on="on" ><router-link to="/AddChoice">Add Choices</router-link></v-btn>
+              <v-btn v-on="on" to="/AddQuestion">Add New Question</v-btn>
+              <v-btn v-on="on" to="/AddChoice">Add Choices</v-btn>
             </v-layout>
           </v-container>
         </template>
@@ -34,7 +34,7 @@
               <v-icon
                 small
                 class="mr-2"
-                @click="editItem(props.item)"
+                @click="editItem()"
               >
                 edit
               </v-icon>
@@ -121,9 +121,10 @@ export default {
       ]
     },
     editItem (item) {
-      this.editedIndex = this.questions.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
+      this.$router.replace({ name: 'editquestion' })
+      //this.editedIndex = this.questions.indexOf(item)
+      //this.editedItem = Object.assign({}, item)
+      //this.dialog = true
     },
 
     deleteItem (item) {

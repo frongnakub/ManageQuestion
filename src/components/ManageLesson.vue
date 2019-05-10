@@ -13,7 +13,25 @@
           ></v-text-field>
         <v-container>
           <v-layout justify-end>
-          <v-btn v-on="on"><router-link to="/AddLesson">Add New Lesson</router-link></v-btn>
+            <v-menu>
+              <template #activator="{ on: menu }">
+                <v-btn
+                  color="primary"
+                  dark
+                  v-on="{ ...menu }"
+                >Add New Lesson</v-btn>
+              </template>
+              <v-list>
+                <v-list-tile
+                  v-for="(itemLesson, index) in itemsLesson"
+                  :key="index"
+                  @click="addNewData"
+                ><!--@click="addNewData"-->
+                  <v-list-tile-title>{{ itemLesson.Lesson }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+          <!--<v-btn v-on="on" to="/AddLesson">Add New Lesson</v-btn>-->
           </v-layout>
         </v-container>
       </template>
@@ -24,6 +42,11 @@
           :items="lesson"
           :search="search"
           class="elevation-1">
+            <!-- loading
+            <v-progress-circular
+              indeterminate
+              color="red"
+            ></v-progress-circular>-->
           <template v-slot:items="props">
             <td >{{ props.item.lessonName }}</td>
             <td >{{ props.item.subLesson }}</td>
@@ -33,7 +56,7 @@
                 small
                 class="mr-2"
                 @click="editItem(props.item)"
-              >
+                to="/EditLesson">
                 edit
               </v-icon>
               <v-icon
@@ -78,7 +101,14 @@ export default {
       lessonName: '',
       subLesson: '',
       lessonDetail: ''
-    }
+    },
+    //เลือก lesson แล้วค่อยเพิ่ม sub-less เนื้อหาข้องใน ถ้าไม่มีชื่อที่จะเพิ่มก็กดเพิ่มชื่อเรื่องเอาเอง
+    //ยังไม่ได้เขียนโลจิก
+    itemsLesson: [{
+      Lesson: 'Other'
+      //lessonName: ''
+    },
+    {Lesson: 'Tense'}]
   }),
   computed: {
     formTitle () {
@@ -118,22 +148,11 @@ export default {
       confirm('Are you sure you want to delete this question?') && this.questions.splice(index, 1)
     },
 
-    close () {
-      this.dialog = false
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
-    },
-
-    save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.questions[this.editedIndex], this.editedItem)
-      } else {
-        this.questions.push(this.editedItem)
-      }
-      this.close()
-    }
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+  .v-progress-circular
+    margin: 1rem
+</style>
