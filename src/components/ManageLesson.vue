@@ -13,7 +13,7 @@
           ></v-text-field>
         <v-container>
           <v-layout justify-end>
-            <v-menu>
+            <!--<v-menu>
               <template #activator="{ on: menu }">
                 <v-btn
                   color="primary"
@@ -25,13 +25,13 @@
                 <v-list-tile
                   v-for="(itemLesson, index) in itemsLesson"
                   :key="index"
-                  @click="addNewData"
-                ><!--@click="addNewData"-->
+                  @click="addNewData()"
+                >
                   <v-list-tile-title>{{ itemLesson.Lesson }}</v-list-tile-title>
                 </v-list-tile>
               </v-list>
-            </v-menu>
-          <!--<v-btn v-on="on" to="/AddLesson">Add New Lesson</v-btn>-->
+            </v-menu>-->
+          <v-btn v-on="on" to="/AddLesson">Add New Lesson</v-btn>
           </v-layout>
         </v-container>
       </template>
@@ -55,9 +55,9 @@
               <v-icon
                 small
                 class="mr-2"
-                @click="editItem(props.item)"
-                to="/EditLesson">
+                @click="editItem()"
                 edit
+              >
               </v-icon>
               <v-icon
                 small
@@ -137,17 +137,28 @@ export default {
           })
       ]
     },
-    editItem (item) {
-      this.editedIndex = this.questions.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
+    addNewData(itemLesson){
+      if(d){
+
+      }
     },
+    //editItem (item) {
+    //  this.editedIndex = this.questions.indexOf(item)
+    //  this.editedItem = Object.assign({}, item)
+    //  this.dialog = true
+    //},
 
     deleteItem (item) {
       const index = this.questions.indexOf(item)
       confirm('Are you sure you want to delete this question?') && this.questions.splice(index, 1)
     },
 
+    editItem () {
+      this.$router.replace({ name: 'editLesson' })
+      //this.editedIndex = this.questions.indexOf(item)
+      //this.editedItem = Object.assign({}, item)
+      //this.dialog = true
+    },
   }
 }
 </script>

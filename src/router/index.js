@@ -17,6 +17,9 @@ import ManageLesson from '@/components/ManageLesson'
 import AddQuestion from '@/components/AddQuestion'
 import AddLesson from '@/components/AddLesson'
 import AddChoice from '@/components/AddChoice'
+import EditQuestion from '@/components/EditQuestion'
+import EditLesson from '@/components/EditLesson'
+
 
 Vue.use(Router)
 Vue.use(Vuetify)
@@ -61,6 +64,16 @@ export default new Router({
       path: '/AddChoice',
       name: 'addChoice',
       component: AddChoice
+    },
+    {
+      path: '/EditQuestion',
+      name: 'editQuestion',
+      component: EditQuestion
+    },
+    {
+      path: '/EditLesson',
+      name: 'editLesson',
+      component: EditLesson
     }
   ]
 })

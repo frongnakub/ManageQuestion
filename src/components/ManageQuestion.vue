@@ -120,8 +120,8 @@ export default {
           })
       ]
     },
-    editItem (item) {
-      this.$router.replace({ name: 'editquestion' })
+    editItem () {
+      this.$router.replace({ name: 'editQuestion' })
       //this.editedIndex = this.questions.indexOf(item)
       //this.editedItem = Object.assign({}, item)
       //this.dialog = true
