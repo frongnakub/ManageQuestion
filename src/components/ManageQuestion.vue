@@ -26,6 +26,7 @@
           :loading="loading"
           class="elevation-1">
           <template v-slot:items="props">
+            <td class="text-xs-center">{{ props.item.questionNo }}</td>
             <td class="text-xs-center">{{ props.item.lessonName }}</td>
             <td class="text-xs-center">{{ props.item.subLessonName }}</td>
             <td class="text-xs-center">{{ props.item.testTypeName }}</td>
@@ -44,6 +45,11 @@
               >
                 delete
               </v-icon>
+              <!-- <v-text-field
+                v-model="questionNo"
+                required
+                box
+              ></v-text-field> -->
             </td>
           </template>
           <v-alert v-slot:no-results :value="true" color="error" icon="warning">
@@ -63,6 +69,7 @@ export default {
     search: '',
     dialog: false,
     headers: [
+      { text: 'Question No', align: 'center', value: 'questionNo', sortable: false },
       { text: 'Lesson', align: 'center', value: 'lessonName', sortable: false },
       { text: 'Sub-Lesson', align: 'center', value: 'subLessonName', sortable: false },
       { text: 'Question for', align: 'center', value: 'testTypeName', sortable: false },
@@ -72,6 +79,7 @@ export default {
     questions: [],
     editedIndex: -1,
     editedItem: {
+      questionNo: Number,
       question: '',
       questionType: '',
       lessonName: '',
@@ -80,6 +88,7 @@ export default {
       description: ''
     },
     defaultItem: {
+      questionNo: Number,
       question: '',
       questionType: '',
       lessonName: '',
@@ -122,12 +131,24 @@ export default {
     },
     editItem () {
       this.$router.replace({ name: 'editQuestion' })
-      //this.editedIndex = this.questions.indexOf(item)
-      //this.editedItem = Object.assign({}, item)
-      //this.dialog = true
+      // this.editedIndex = this.questions.indexOf(item)
+      // this.editedItem = Object.assign({}, item)
+      // this.dialog = true
     },
 
     deleteItem (item) {
+      axios
+        .get('http://localhost:3003/delete/' + item.questionNo, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
       const index = this.questions.indexOf(item)
       confirm('Are you sure you want to delete this question?') && this.questions.splice(index, 1)
     },

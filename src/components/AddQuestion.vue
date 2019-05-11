@@ -45,7 +45,7 @@
               box
           ></v-textarea>
           <v-card-actions class="justify-end">
-            <v-btn primary v-on:click="addQuestion()">Confirm</v-btn>
+            <v-btn primary v-on:click ="addQuestion()">Confirm</v-btn>
           </v-card-actions>
         </v-form>
       </v-container>
@@ -102,6 +102,8 @@ export default {
         .catch(error => {
           console.log(error)
         })
+      alert('Add question successfully')
+      this.$router.replace({ name: 'manageQuestion' })
     },
     testName () {
       this.tests = [

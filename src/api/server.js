@@ -40,7 +40,7 @@ app.get('/questions', cors(), (req, res) => {
    
     const connection = getConnection()
 
-    connection.query('SELECT questionNo,question,description,lessonName,testTypeName,subLessonName FROM Question q join Lesson l on q.Lesson_LessonNo = l.LessonNo join Test t on q.test_testno = t.testno join TestType tt on t.testType_TestTypeNo = tt.testTypeNo join SubLesson s on q.subLessonNo = s.subLessonNo', 
+    connection.query('SELECT questionNo,question,description,lessonName,testTypeName FROM Question q join Lesson l on q.Lesson_LessonNo = l.LessonNo join Test t on q.test_testno = t.testno join TestType tt on t.testType_TestTypeNo = tt.testTypeNo', 
     function (error, rows, fields) {
         if (error) { 
             console.log(error) 
@@ -142,6 +142,23 @@ app.post('/choices',cors(), (req, res) => {
           throw error
       };
       console.log("Add choices successfully")
+      res.json(rows)
+  })
+})
+
+app.get('/delete/(:questionNo)',cors(), (req, res) => {
+  var user = {questionNo: req.params.questionNo}
+  console.log("Delete question")
+  console.log(req.params.questionNo)
+  const connection = getConnection()
+  connection.query('DELETE FROM Question WHERE questionNo = ' + req.params.questionNo,
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(204)
+          throw error
+      };
+      console.log("Delete question successfully")
       res.json(rows)
   })
 })

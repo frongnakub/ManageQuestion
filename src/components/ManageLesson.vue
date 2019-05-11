@@ -102,11 +102,11 @@ export default {
       subLesson: '',
       lessonDetail: ''
     },
-    //เลือก lesson แล้วค่อยเพิ่ม sub-less เนื้อหาข้องใน ถ้าไม่มีชื่อที่จะเพิ่มก็กดเพิ่มชื่อเรื่องเอาเอง
-    //ยังไม่ได้เขียนโลจิก
+    // เลือก lesson แล้วค่อยเพิ่ม sub-less เนื้อหาข้องใน ถ้าไม่มีชื่อที่จะเพิ่มก็กดเพิ่มชื่อเรื่องเอาเอง
+    // ยังไม่ได้เขียนโลจิก
     itemsLesson: [{
       Lesson: 'Other'
-      //lessonName: ''
+      // lessonName: ''
     },
     {Lesson: 'Tense'}]
   }),
@@ -137,16 +137,16 @@ export default {
           })
       ]
     },
-    addNewData(itemLesson){
-      if(d){
+    addNewData (itemLesson) {
+      if (itemLesson) {
 
       }
     },
-    //editItem (item) {
+    // editItem (item) {
     //  this.editedIndex = this.questions.indexOf(item)
     //  this.editedItem = Object.assign({}, item)
     //  this.dialog = true
-    //},
+    // },
 
     deleteItem (item) {
       const index = this.questions.indexOf(item)
@@ -155,10 +155,10 @@ export default {
 
     editItem () {
       this.$router.replace({ name: 'editLesson' })
-      //this.editedIndex = this.questions.indexOf(item)
-      //this.editedItem = Object.assign({}, item)
-      //this.dialog = true
-    },
+      // this.editedIndex = this.questions.indexOf(item)
+      // this.editedItem = Object.assign({}, item)
+      // this.dialog = true
+    }
   }
 }
 </script>

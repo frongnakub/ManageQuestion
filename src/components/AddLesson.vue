@@ -55,14 +55,13 @@ export default {
     },
 
     addQuestion () {
-      //if (this.editedIndex > -1) {
-      //  Object.assign(this.questions[this.editedIndex], this.editedItem)
-      //} else {
-      //  this.questions.push(this.editedItem)
-      //}
+      // if (this.editedIndex > -1) {
+      //   Object.assign(this.questions[this.editedIndex], this.editedItem)
+      // } else {
+      //   this.questions.push(this.editedItem)
+      // }
       this.close()
     }
   }
 }
 </script>
-

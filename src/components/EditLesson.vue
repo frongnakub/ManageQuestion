@@ -16,7 +16,7 @@
           ref="form"
           lazy-validation
         >
-          <v-list-tile>Lesson*</v-list-tile>        
+          <v-list-tile>Lesson*</v-list-tile>
             <v-select
               v-model="select"
               :items="items"
@@ -47,20 +47,19 @@
 </template>
 
 <script>
-  export default {
-    name: 'EditLesson',
-    data: () => ({
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4'
-      ],
-      checkbox: false
-    }),
-    methods: {
-      
-    }
+export default {
+  name: 'EditLesson',
+  data: () => ({
+    select: null,
+    items: [
+      'Item 1',
+      'Item 2',
+      'Item 3',
+      'Item 4'
+    ],
+    checkbox: false
+  }),
+  methods: {
   }
+}
 </script>
