@@ -20,6 +20,16 @@
               box
               required
             ></v-select>
+          <v-list-tile><h3>- Sub Lesson *If no, selects dat(-)</h3></v-list-tile>
+          <v-select
+              v-model="subLessonNo"
+              :items="subLessons"
+              item-text="subLessonName"
+              item-value="subLessonNo"
+              :rules="[v => !!v || 'Sub required']"
+              box
+              required
+          ></v-select>
           <v-list-tile><h3>- Question</h3></v-list-tile>
           <v-text-field
             label="Question*"
@@ -37,13 +47,6 @@
               box
               required
             ></v-select>
-          <v-list-tile><h3>- Description</h3></v-list-tile>
-          <v-textarea
-              label="Description"
-              v-model="description"
-              required
-              box
-          ></v-textarea>
           <v-card-actions class="justify-end">
             <v-btn primary v-on:click ="addQuestion()">Confirm</v-btn>
           </v-card-actions>
@@ -61,14 +64,16 @@ export default {
   data: () => ({
     select: null,
     lessons: [],
+    subLessons: [],
     question: '',
-    description: '',
     test_testNo: Number,
-    lesson_lessonNo: Number
+    lesson_lessonNo: Number,
+    subLessonNo: Number
   }),
   created () {
     this.initialize()
     this.testName()
+    this.subLesson()
   },
   methods: {
     initialize () {
@@ -88,9 +93,9 @@ export default {
       axios
         .post('http://localhost:3003/question', {
           question: this.question,
-          description: this.description,
           test_testNo: Number(this.test_testNo),
           lesson_lessonNo: Number(this.lesson_lessonNo),
+          subLessonNo: Number(this.subLessonNo),
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -112,6 +117,19 @@ export default {
           .then(response => {
             console.log(response)
             this.tests = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      ]
+    },
+    subLesson () {
+      this.subLessons = [
+        axios
+          .get('http://localhost:3003/subLessonName')
+          .then(response => {
+            console.log(response)
+            this.subLessons = response.data
           })
           .catch(error => {
             console.log(error)
