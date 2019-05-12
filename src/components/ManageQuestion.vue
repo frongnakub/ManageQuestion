@@ -3,21 +3,81 @@
     <v-content>
     <v-container>
         <v-dialog v-model="dialog" max-width="100%">
-        <template v-slot:activator="{ on }">
-          <v-text-field
-            v-model="search"
-            label="Search"
-            single-line
-            hide-details
-            solo
-          ></v-text-field>
-          <v-container>
-            <v-layout justify-end>
-              <v-btn v-on="on" to="/AddQuestion">Add New Question</v-btn>
-              <v-btn v-on="on" to="/AddChoice">Add Choices</v-btn>
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="search"
+              label="Search"
+              single-line
+              hide-details
+              solo
+            ></v-text-field>
+            <v-container>
+              <v-layout justify-end>
+                <v-btn v-on="on" to="/AddQuestion">Add New Question</v-btn>
+                <v-btn v-on="on" to="/AddChoice">Add Choices</v-btn>
+              </v-layout>
+            </v-container>
+          </template>
+          <v-card>
+            <v-layout align-center justify-center>
+              <v-card-title>
+                <span class="headline">{{ formTitle }}</span>
+              </v-card-title>
             </v-layout>
-          </v-container>
-        </template>
+            <v-card-text>
+              <v-container grid-list-md>
+                <v-layout wrap>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- Lesson</h3></v-list-tile>
+                    <v-select
+                      v-model="editedItem.lessons"
+                      :items="lessons"
+                      item-text="lessonName"
+                      item-value="lessonNo"
+                      box
+                      required
+                    ></v-select>
+                  </v-flex>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- Sub Lesson</h3></v-list-tile>
+                    <v-select
+                      v-model="editedItem.subLesson"
+                      :items="subLessons"
+                      item-text="subLessonName"
+                      item-value="subLessonNo"
+                      box
+                      required
+                    ></v-select>
+                  </v-flex>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- Question</h3></v-list-tile>
+                    <v-text-field
+                      v-model="editedItem.question"
+                      required
+                      box
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- Question for</h3></v-list-tile>
+                      <v-select
+                      v-model="editedItem.test_testNo"
+                      :items="tests"
+                      item-text="testTypeName"
+                      item-value="testTypeNo"
+                      box
+                      required
+                    ></v-select>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+              <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+            </v-card-actions>
+          </v-card>
         </v-dialog>
         <v-data-table
           :headers="headers"
@@ -35,7 +95,7 @@
               <v-icon
                 small
                 class="mr-2"
-                @click="editItem()"
+                @click="editItem(props.item)"
               >
                 edit
               </v-icon>
@@ -95,11 +155,6 @@ export default {
       subLessonName: '',
       choices: '',
       description: ''
-    },
-    questionR: undefined,
-    rules: {
-      lengthQ: len => v => (v || '').length >= 1 || 'Please enter',
-      lengthD: len => v => (v || '').length >= 1
     }
   }),
   computed: {
@@ -129,11 +184,11 @@ export default {
           })
       ]
     },
-    editItem () {
-      this.$router.replace({ name: 'editQuestion' })
-      // this.editedIndex = this.questions.indexOf(item)
-      // this.editedItem = Object.assign({}, item)
-      // this.dialog = true
+    editItem (item) {
+      //this.$router.replace({ name: 'editQuestion' })
+      this.editedIndex = this.questions.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
     },
 
     deleteItem (item) {

@@ -33,6 +33,55 @@
             </v-menu>-->
           <v-btn v-on="on" to="/AddLesson">Add New Lesson</v-btn>
           </v-layout>
+          <v-card>
+            <v-layout align-center justify-center>
+              <v-card-title>
+                <span class="headline">{{ formTitle }}</span>
+              </v-card-title>
+            </v-layout>
+            <v-card-text>
+              <v-container grid-list-md>
+                <v-layout wrap>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- Lesson</h3></v-list-tile>
+                    <v-select
+                      v-model="editedItem.lessons"
+                      :items="lessons"
+                      item-text="lessonName"
+                      item-value="lessonNo"
+                      box
+                      required
+                    ></v-select>
+                  </v-flex>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- Sub Lesson</h3></v-list-tile>
+                    <v-select
+                      v-model="editedItem.subLesson"
+                      :items="subLessons"
+                      item-text="subLessonName"
+                      item-value="subLessonNo"
+                      box
+                      required
+                    ></v-select>
+                  </v-flex>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- Detail</h3></v-list-tile>
+                    <v-text-field
+                      v-model="editedItem.questionDeatail"
+                      required
+                      box
+                    ></v-text-field>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+              <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+            </v-card-actions>
+          </v-card>
         </v-container>
       </template>
     </v-dialog>
@@ -112,7 +161,7 @@ export default {
   }),
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'Add Lesson' : 'Edit Lesson'
+      return this.editedIndex === -1 ? '' :'Edit Lesson'
     }
   },
   watch: {
@@ -142,23 +191,34 @@ export default {
 
       }
     },
-    // editItem (item) {
-    //  this.editedIndex = this.questions.indexOf(item)
-    //  this.editedItem = Object.assign({}, item)
-    //  this.dialog = true
-    // },
+    editItem (item) {
+      this.editedIndex = this.questions.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
+     },
 
     deleteItem (item) {
       const index = this.questions.indexOf(item)
       confirm('Are you sure you want to delete this question?') && this.questions.splice(index, 1)
     },
 
-    editItem () {
-      this.$router.replace({ name: 'editLesson' })
-      // this.editedIndex = this.questions.indexOf(item)
-      // this.editedItem = Object.assign({}, item)
-      // this.dialog = true
+    close () {
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      }, 300)
+    },
+
+    save () {
+      if (this.editedIndex > -1) {
+        Object.assign(this.questions[this.editedIndex], this.editedItem)
+      } else {
+        this.questions.push(this.editedItem)
+      }
+      this.close()
     }
+    
   }
 }
 </script>
