@@ -161,7 +161,7 @@ export default {
   }),
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? '' :'Edit Lesson'
+      return this.editedIndex === -1 ? '' : 'Edit Lesson'
     }
   },
   watch: {
@@ -195,13 +195,11 @@ export default {
       this.editedIndex = this.questions.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
-     },
-
+    },
     deleteItem (item) {
       const index = this.questions.indexOf(item)
       confirm('Are you sure you want to delete this question?') && this.questions.splice(index, 1)
     },
-
     close () {
       this.dialog = false
       setTimeout(() => {
@@ -209,7 +207,6 @@ export default {
         this.editedIndex = -1
       }, 300)
     },
-
     save () {
       if (this.editedIndex > -1) {
         Object.assign(this.questions[this.editedIndex], this.editedItem)
@@ -218,7 +215,6 @@ export default {
       }
       this.close()
     }
-    
   }
 }
 </script>

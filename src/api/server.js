@@ -20,7 +20,7 @@ app.use(cors())
 
 function getConnection(){
     return mysql.createConnection({
-        host: '54.188.28.47',
+        host: '34.219.161.63',
         user: 'proj',
         password: 'Oui_plic2',
         database: 'GrammarBE'
@@ -160,6 +160,26 @@ app.post('/choices',cors(), (req, res) => {
           throw error
       };
       console.log("Add choices successfully")
+      res.json(rows)
+  })
+})
+
+app.post('/edit', (req, res) => {
+  console.log("Edit questions")
+  console.log(req.body.questionNo)
+  console.log(req.body.question)
+  console.log(req.body.test_testNo)
+  console.log(req.body.lesson_lessonNo)
+  console.log(req.body.subLessonNo)
+  const connection = getConnection()
+  connection.query('UPDATE Question SET question = "' + req.body.question + '", test_testNo = '+ req.body.test_testNo + ', lesson_lessonNo = ' + req.body.lesson_lessonNo + ', subLessonNo = ' + req.body.subLessonNo + ' WHERE questionNo = ' + req.body.questionNo, 
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(500)
+          throw error
+      };
+      console.log("Add successfully")
       res.json(rows)
   })
 })

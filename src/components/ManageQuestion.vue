@@ -28,9 +28,18 @@
               <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12 >
+                    <v-list-tile><h3>- Question Number</h3></v-list-tile>
+                    <v-text-field
+                      v-model="editedItem.questionNo"
+                      required
+                      box
+                      readonly="true"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 >
                     <v-list-tile><h3>- Lesson</h3></v-list-tile>
                     <v-select
-                      v-model="editedItem.lessons"
+                      v-model="editedItem.lesson_lessonNo"
                       :items="lessons"
                       item-text="lessonName"
                       item-value="lessonNo"
@@ -41,7 +50,7 @@
                   <v-flex xs12 >
                     <v-list-tile><h3>- Sub Lesson</h3></v-list-tile>
                     <v-select
-                      v-model="editedItem.subLesson"
+                      v-model="editedItem.subLessonNo"
                       :items="subLessons"
                       item-text="subLessonName"
                       item-value="subLessonNo"
@@ -71,7 +80,6 @@
                 </v-layout>
               </v-container>
             </v-card-text>
-
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
@@ -144,17 +152,7 @@ export default {
       questionType: '',
       lessonName: '',
       subLessonName: '',
-      choices: '',
-      description: ''
-    },
-    defaultItem: {
-      questionNo: Number,
-      question: '',
-      questionType: '',
-      lessonName: '',
-      subLessonName: '',
-      choices: '',
-      description: ''
+      choices: ''
     }
   }),
   computed: {
@@ -169,6 +167,9 @@ export default {
   },
   created () {
     this.initialize()
+    this.lessonName()
+    this.testName()
+    this.subLesson()
   },
   methods: {
     initialize () {
@@ -185,12 +186,11 @@ export default {
       ]
     },
     editItem (item) {
-      //this.$router.replace({ name: 'editQuestion' })
+      // this.$router.replace({ name: 'editQuestion' })
       this.editedIndex = this.questions.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
-
     deleteItem (item) {
       axios
         .get('http://localhost:3003/delete/' + item.questionNo, {
@@ -207,7 +207,6 @@ export default {
       const index = this.questions.indexOf(item)
       confirm('Are you sure you want to delete this question?') && this.questions.splice(index, 1)
     },
-
     close () {
       this.dialog = false
       setTimeout(() => {
@@ -215,14 +214,70 @@ export default {
         this.editedIndex = -1
       }, 300)
     },
-
     save () {
+      axios
+        .post('http://localhost:3003/edit', {
+          questionNo: this.editedItem.questionNo,
+          question: this.editedItem.question,
+          test_testNo: Number(this.editedItem.test_testNo),
+          lesson_lessonNo: Number(this.editedItem.lesson_lessonNo),
+          subLessonNo: Number(this.editedItem.subLessonNo),
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(response => {
+          console.log(response)
+          this.items = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
       if (this.editedIndex > -1) {
         Object.assign(this.questions[this.editedIndex], this.editedItem)
       } else {
         this.questions.push(this.editedItem)
       }
       this.close()
+    },
+    lessonName () {
+      this.lessons = [
+        axios
+          .get('http://localhost:3003/lessonName')
+          .then(response => {
+            console.log(response)
+            this.lessons = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      ]
+    },
+    testName () {
+      this.tests = [
+        axios
+          .get('http://localhost:3003/testName')
+          .then(response => {
+            console.log(response)
+            this.tests = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      ]
+    },
+    subLesson () {
+      this.subLessons = [
+        axios
+          .get('http://localhost:3003/subLessonName')
+          .then(response => {
+            console.log(response)
+            this.subLessons = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      ]
     }
   }
 }
