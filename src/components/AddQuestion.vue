@@ -48,7 +48,8 @@
               required
             ></v-select>
           <v-card-actions class="justify-end">
-            <v-btn primary v-on:click ="addQuestion()">Confirm</v-btn>
+            <v-btn primary v-on:click ="cancle()">Cancle</v-btn>
+            <v-btn primary v-on:click ="addQuestion()" color="red darken-2">Confirm</v-btn>
           </v-card-actions>
         </v-form>
       </v-container>

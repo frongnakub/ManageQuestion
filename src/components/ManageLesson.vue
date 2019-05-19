@@ -3,7 +3,7 @@
     <v-content>
     <v-container>
       <v-dialog v-model="dialog" max-width="100%">
-      <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on }">
           <v-text-field
             v-model="search"
             label="Search"
@@ -11,8 +11,8 @@
             hide-details
             solo
           ></v-text-field>
-        <v-container>
-          <v-layout justify-end>
+          <v-container>
+            <v-layout justify-end>
             <!--<v-menu>
               <template #activator="{ on: menu }">
                 <v-btn
@@ -31,105 +31,104 @@
                 </v-list-tile>
               </v-list>
             </v-menu>-->
-          <v-btn v-on="on" to="/AddLesson">Add New Lesson</v-btn>
-          </v-layout>
-          <v-card>
-            <v-layout align-center justify-center>
-              <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
-              </v-card-title>
+              <v-btn v-on="on" to="/AddLesson">Add New Lesson</v-btn>
             </v-layout>
-            <v-card-text>
-              <v-container grid-list-md>
-                <v-layout wrap>
-                  <v-flex xs12 >
-                    <v-list-tile><h3>- Lesson</h3></v-list-tile>
-                    <v-select
-                      v-model="editedItem.lessons"
-                      :items="lessons"
-                      item-text="lessonName"
-                      item-value="lessonNo"
-                      box
-                      required
-                    ></v-select>
-                  </v-flex>
-                  <v-flex xs12 >
-                    <v-list-tile><h3>- Sub Lesson</h3></v-list-tile>
-                    <v-select
-                      v-model="editedItem.subLesson"
-                      :items="subLessons"
-                      item-text="subLessonName"
-                      item-value="subLessonNo"
-                      box
-                      required
-                    ></v-select>
-                  </v-flex>
-                  <v-flex xs12 >
-                    <v-list-tile><h3>- Detail</h3></v-list-tile>
-                    <v-text-field
-                      v-model="editedItem.questionDeatail"
-                      required
-                      box
-                    ></v-text-field>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card-text>
+          </v-container>
+        </template>
+        <v-card>
+          <v-layout align-center justify-center>
+            <v-card-title>
+              <span class="headline">{{ formTitle }}</span>
+            </v-card-title>
+          </v-layout>
+           <v-card-text>
+            <v-container grid-list-md>
+              <v-layout wrap>
+                <v-flex xs12 >
+                  <v-list-tile><h3>- Lesson</h3></v-list-tile>
+                  <v-select
+                    v-model="editedItem.lessons"
+                    :items="lessons"
+                    item-text="lessonName"
+                    item-value="lessonNo"
+                    box
+                    required
+                  ></v-select>
+                </v-flex>
+                <v-flex xs12 >
+                  <v-list-tile><h3>- Sub Lesson</h3></v-list-tile>
+                  <v-select
+                    v-model="editedItem.subLesson"
+                    :items="subLessons"
+                    item-text="subLessonName"
+                    item-value="subLessonNo"
+                    box
+                    required
+                  ></v-select>
+                </v-flex>
+                <v-flex xs12 >
+                  <v-list-tile><h3>- Detail</h3></v-list-tile>
+                  <v-text-field
+                    v-model="editedItem.questionDeatail"
+                    required
+                    box
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-container>
-      </template>
-    </v-dialog>
-
-        <v-data-table
-          :headers="headers"
-          :items="lesson"
-          :search="search"
-          class="elevation-1">
+      <v-data-table
+        :headers="headers"
+        :items="lesson"
+        :search="search"
+        class="elevation-1">
             <!-- loading
             <v-progress-circular
               indeterminate
               color="red"
             ></v-progress-circular>-->
-          <template v-slot:items="props">
-            <td >{{ props.item.lessonName }}</td>
-            <td >{{ props.item.subLesson }}</td>
-            <td >{{ props.item.questionDeatail }}</td>
-            <td >
-              <v-icon
-                small
-                class="mr-2"
-                @click="editItem()"
-                edit
-              >
-              </v-icon>
-              <v-icon
-                small
-                @click="deleteItem(props.item)"
-              >
-                delete
-              </v-icon>
-            </td>
-          </template>
-          <v-alert v-slot:no-results :value="true" color="error" icon="warning" solo>
-            Your search for "{{ search }}" found no results.
-          </v-alert>
-        </v-data-table>
+        <template v-slot:items="props">
+          <td class="text-xs-center">{{ props.item.lessonName }}</td>
+          <td class="text-xs-center">{{ props.item.subLesson }}</td>
+          <td class="text-xs-center">{{ props.item.questionDeatail }}</td>
+          <td class="text-xs-center">
+            <v-icon
+              small
+              class="mr-2"
+              @click="editItem()"
+              edit
+            >
+            </v-icon>
+            <v-icon
+              small
+              @click="deleteItem(props.item)"
+            >
+              delete
+            </v-icon>
+           </td>
+        </template>
+        <v-alert v-slot:no-results :value="true" color="error" icon="warning" solo>
+          Your search for "{{ search }}" found no results.
+        </v-alert>
+      </v-data-table>
     </v-container>
-    </v-content>
-  </v-app>
+  </v-content>
+</v-app>
 
 </template>
 
 <script>
 import axios from 'axios'
 export default {
-  name: 'ManageQuestion',
+  name: 'ManageLesson',
   data: () => ({
     search: '',
     dialog: false,
