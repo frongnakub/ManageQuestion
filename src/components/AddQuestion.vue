@@ -30,9 +30,8 @@
               box
               required
           ></v-select>
-          <v-list-tile><h3>- Question</h3></v-list-tile>
+          <v-list-tile><h3>- Question*</h3></v-list-tile>
           <v-text-field
-            label="Question*"
             v-model="question"
             required
             box
@@ -48,7 +47,7 @@
               required
             ></v-select>
           <v-card-actions class="justify-end">
-            <v-btn primary v-on:click ="cancle()">Cancle</v-btn>
+            <v-btn primary v-on:click ="close()">Cancle</v-btn>
             <v-btn primary v-on:click ="addQuestion()" color="red darken-2">Confirm</v-btn>
           </v-card-actions>
         </v-form>
@@ -109,7 +108,12 @@ export default {
           console.log(error)
         })
       alert('Add question successfully')
-      this.$router.replace({ name: 'manageQuestion' })
+      const actc = confirm('Do you want add choices for this question ?')
+        if (actc == true) {
+          this.$router.replace({ name: 'addChoice' })
+        } else {
+          this.$router.replace({ name: 'manageQuestion' })
+        }
     },
     testName () {
       this.tests = [
@@ -136,6 +140,9 @@ export default {
             console.log(error)
           })
       ]
+    },
+    close () {
+    this.$router.replace({ name: 'manageQuestion' })
     }
   }
 }

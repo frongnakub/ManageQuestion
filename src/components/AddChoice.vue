@@ -35,7 +35,8 @@
             box
           ></v-text-field>
           <v-card-actions class="justify-end">
-            <v-btn primary v-on:click="addChoice()">Confirm</v-btn>
+            <v-btn primary v-on:click ="close()">Cancle</v-btn>
+            <v-btn primary v-on:click="addChoice()" color="red darken-2">Confirm</v-btn>
           </v-card-actions>
         </v-form>
       </v-container>
@@ -89,6 +90,9 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    close () {
+      this.$router.replace({ name: 'manageQuestion' })
     }
   }
 }

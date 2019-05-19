@@ -61,6 +61,10 @@ export default {
       //   this.questions.push(this.editedItem)
       // }
       this.close()
+    },
+    
+    close () {
+    this.$router.replace({ name: 'manageLesson' })
     }
   }
 }
