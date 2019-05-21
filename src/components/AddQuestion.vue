@@ -146,7 +146,7 @@ export default {
       setTimeout(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
-        this.$router.replace({ name: 'manageLesson' })
+        this.$router.replace({ name: 'manageQuestion' })
       }, 300)
     }
   }

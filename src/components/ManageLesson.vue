@@ -45,9 +45,18 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 >
+                  <v-list-tile><h3>- Lesson Detail Number</h3></v-list-tile>
+                  <v-text-field
+                      v-model="editedItem.lessonDetailNo"
+                      required
+                      box
+                      readonly="true"
+                    ></v-text-field>
+                </v-flex>
+                <v-flex xs12 >
                   <v-list-tile><h3>- Lesson</h3></v-list-tile>
                   <v-select
-                    v-model="editedItem.lessons"
+                    v-model="editedItem.lesson_lessonNo"
                     :items="lessons"
                     item-text="lessonName"
                     item-value="lessonNo"
@@ -58,7 +67,7 @@
                 <v-flex xs12 >
                   <v-list-tile><h3>- Sub Lesson</h3></v-list-tile>
                   <v-select
-                    v-model="editedItem.subLesson"
+                    v-model="editedItem.subLessonNo"
                     :items="subLessons"
                     item-text="subLessonName"
                     item-value="subLessonNo"
@@ -67,9 +76,9 @@
                   ></v-select>
                 </v-flex>
                 <v-flex xs12 >
-                  <v-list-tile><h3>- Detail</h3></v-list-tile>
+                  <v-list-tile><h3>-Lesson Detail</h3></v-list-tile>
                   <v-text-field
-                    v-model="editedItem.questionDetail"
+                    v-model="editedItem.lessonDescription"
                     required
                     box
                   ></v-text-field>
@@ -143,14 +152,10 @@ export default {
     lesson: [],
     editedIndex: -1,
     editedItem: {
+      lessonDetailNo: Number,
       lessonName: '',
       subLesson: '',
-      lessonDetail: ''
-    },
-    defaultItem: {
-      lessonName: '',
-      subLesson: '',
-      lessonDetail: ''
+      lessonDescription: ''
     },
     itemsLesson: [{
       Lesson: 'Other'
@@ -159,7 +164,7 @@ export default {
   }),
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? '' : 'Edit Lesson'
+      return this.editedIndex === -1 ? 'Add Lesson Detail' : 'Edit Lesson Detail'
     }
   },
   watch: {
@@ -169,6 +174,8 @@ export default {
   },
   created () {
     this.initialize()
+    this.lessonName()
+    this.subLesson()
   },
   methods: {
     initialize () {
@@ -186,7 +193,7 @@ export default {
     },
     editItem (item) {
       // this.$router.replace({ name: 'editQuestion' })
-      this.editedIndex = this.questions.indexOf(item)
+      this.editedIndex = this.lesson.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
@@ -215,10 +222,9 @@ export default {
     },
     save () {
       axios
-        .post('http://localhost:3003/edit', {
-          questionNo: this.editedItem.questionNo,
-          question: this.editedItem.question,
-          test_testNo: Number(this.editedItem.test_testNo),
+        .post('http://localhost:3003/edit/lesson', {
+          lessonDetailNo: this.editedItem.lessonDetailNo,
+          lessonDescription: this.editedItem.lessonDescription,
           lesson_lessonNo: Number(this.editedItem.lesson_lessonNo),
           subLessonNo: Number(this.editedItem.subLessonNo),
           headers: {
@@ -233,11 +239,37 @@ export default {
           console.log(error)
         })
       if (this.editedIndex > -1) {
-        Object.assign(this.questions[this.editedIndex], this.editedItem)
+        Object.assign(this.lesson[this.editedIndex], this.editedItem)
       } else {
-        this.questions.push(this.editedItem)
+        this.lesson.push(this.editedItem)
       }
       this.close()
+    },
+    lessonName () {
+      this.lessons = [
+        axios
+          .get('http://localhost:3003/lessonName')
+          .then(response => {
+            console.log(response)
+            this.lessons = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      ]
+    },
+    subLesson () {
+      this.subLessons = [
+        axios
+          .get('http://localhost:3003/subLessonName')
+          .then(response => {
+            console.log(response)
+            this.subLessons = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      ]
     }
   }
 }

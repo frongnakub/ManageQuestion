@@ -219,6 +219,26 @@ app.post('/edit', (req, res) => {
   })
 })
 
+app.post('/edit/lesson', (req, res) => {
+  console.log("Edit lesson detail")
+  console.log(req.body.lessonDetailNo)
+  console.log(req.body.lessonDescription)
+  console.log(req.body.lesson_lessonNo)
+  console.log(req.body.subLessonNo)
+  const connection = getConnection()
+  connection.query('UPDATE LessonDetail SET lessonDescription = "' + req.body.lessonDescription + '", lesson_lessonNo = ' + req.body.lesson_lessonNo + ', subLessonNo = ' + req.body.subLessonNo + ' WHERE lessonDetailNo = ' + req.body.lessonDetailNo, 
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(500)
+          throw error
+      };
+      console.log("Edit lesson detail successfully")
+      res.json(rows)
+  })
+})
+
+
 app.get('/delete/(:questionNo)',cors(), (req, res) => {
   var user = {questionNo: req.params.questionNo}
   console.log("Delete question")
