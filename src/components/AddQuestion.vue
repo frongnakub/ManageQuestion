@@ -109,11 +109,11 @@ export default {
         })
       alert('Add question successfully')
       const actc = confirm('Do you want add choices for this question ?')
-        if (actc == true) {
-          this.$router.replace({ name: 'addChoice' })
-        } else {
-          this.$router.replace({ name: 'manageQuestion' })
-        }
+      if (actc === true) {
+        this.$router.replace({ name: 'addChoice' })
+      } else {
+        this.$router.replace({ name: 'manageQuestion' })
+      }
     },
     testName () {
       this.tests = [
@@ -142,7 +142,12 @@ export default {
       ]
     },
     close () {
-    this.$router.replace({ name: 'manageQuestion' })
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+        this.$router.replace({ name: 'manageLesson' })
+      }, 300)
     }
   }
 }

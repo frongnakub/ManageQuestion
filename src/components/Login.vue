@@ -10,8 +10,8 @@
                 </v-toolbar>
                 <v-card-text>
                 <v-form>
-                <v-text-field prepend-icon="person" name="Username" label="Username" v-model="input.username"></v-text-field>
-                <v-text-field prepend-icon="lock" name="Password" label="Password" type="password" v-model="input.password"></v-text-field>
+                <v-text-field prepend-icon="person" name="Username" label="Username" v-model="username"></v-text-field>
+                <v-text-field prepend-icon="lock" name="Password" label="Password" type="password" v-model="password"></v-text-field>
                 <v-card-actions>
                   <v-btn primary large block v-on:click="login()">Login</v-btn>
                 </v-card-actions>
@@ -26,27 +26,38 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Login',
-  data () {
-    return {
-      input: {
-        username: 'frongnakub',
-        password: 'password'
-      }
-    }
-  },
+  data: () => ({
+    username: '',
+    password: ''
+  }),
   methods: {
     login () {
-      if (this.input.username !== '' && this.input.password !== '') {
+      axios
+        .post('http://localhost:3003/login', {
+          username: this.username,
+          password: this.password,
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      if (this.username !== '' && this.password !== '') {
         if (
-          this.input.username === this.$parent.mockAccount.username &&
-          this.input.password === this.$parent.mockAccount.password
+          this.username === this.$parent.mockAccount.username &&
+          this.password === this.$parent.mockAccount.password
         ) {
           this.$emit('authenticated', true)
           this.$router.replace({ name: 'manageLesson' })
         } else {
-          console.log('The username and / or password is incorrect')
+          alert('The username or password is not correct')
         }
       } else {
         console.log('A username and password must be present')

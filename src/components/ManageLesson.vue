@@ -69,7 +69,7 @@
                 <v-flex xs12 >
                   <v-list-tile><h3>- Detail</h3></v-list-tile>
                   <v-text-field
-                    v-model="editedItem.questionDeatail"
+                    v-model="editedItem.questionDetail"
                     required
                     box
                   ></v-text-field>
@@ -96,16 +96,17 @@
               color="red"
             ></v-progress-circular>-->
         <template v-slot:items="props">
+          <td class="text-xs-center">{{ props.item.lessonDetailNo }}</td>
           <td class="text-xs-center">{{ props.item.lessonName }}</td>
-          <td class="text-xs-center">{{ props.item.subLesson }}</td>
-          <td class="text-xs-center">{{ props.item.questionDeatail }}</td>
+          <td class="text-xs-center">{{ props.item.sublessonName }}</td>
+          <td class="text-xs-center">{{ props.item.lessonDescription }}</td>
           <td class="text-xs-center">
             <v-icon
               small
               class="mr-2"
-              @click="editItem()"
-              edit
+              @click="editItem(props.item)"
             >
+              edit
             </v-icon>
             <v-icon
               small
@@ -133,12 +134,13 @@ export default {
     search: '',
     dialog: false,
     headers: [
+      { text: 'Lesson No', align: 'center', value: 'lessonDetailNo', sortable: false },
       { text: 'Lesson', align: 'center', value: 'lessonName', sortable: false },
-      { text: 'Sub-Lesson', align: 'center', value: 'subLesson', sortable: false },
-      { text: 'Deatail', align: 'center', value: 'lessonDetail', sortable: false },
+      { text: 'Sub-Lesson', align: 'center', value: 'sublessonName', sortable: false },
+      { text: 'Detail', align: 'center', value: 'lessonDetail', sortable: false },
       { text: 'Actions', align: 'center', value: 'lessonName', sortable: false }
     ],
-    questions: [],
+    lesson: [],
     editedIndex: -1,
     editedItem: {
       lessonName: '',
@@ -150,11 +152,8 @@ export default {
       subLesson: '',
       lessonDetail: ''
     },
-    // เลือก lesson แล้วค่อยเพิ่ม sub-less เนื้อหาข้องใน ถ้าไม่มีชื่อที่จะเพิ่มก็กดเพิ่มชื่อเรื่องเอาเอง
-    // ยังไม่ได้เขียนโลจิก
     itemsLesson: [{
       Lesson: 'Other'
-      // lessonName: ''
     },
     {Lesson: 'Tense'}]
   }),
@@ -173,31 +172,39 @@ export default {
   },
   methods: {
     initialize () {
-      this.questions = [
+      this.lesson = [
         axios
-          .get('http://localhost:3003/questions')
+          .get('http://localhost:3003/lessonDetail')
           .then(response => {
             console.log(response)
-            this.questions = response.data
+            this.lesson = response.data
           })
           .catch(error => {
             console.log(error)
           })
       ]
     },
-    addNewData (itemLesson) {
-      if (itemLesson) {
-
-      }
-    },
     editItem (item) {
+      // this.$router.replace({ name: 'editQuestion' })
       this.editedIndex = this.questions.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
     deleteItem (item) {
-      const index = this.questions.indexOf(item)
-      confirm('Are you sure you want to delete this question?') && this.questions.splice(index, 1)
+      axios
+        .get('http://localhost:3003/delete/lesson/' + item.lessonDetailNo, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      const index = this.lesson.indexOf(item)
+      confirm('Are you sure you want to delete this lesson detail?') && this.lesson.splice(index, 1)
     },
     close () {
       this.dialog = false
@@ -207,6 +214,24 @@ export default {
       }, 300)
     },
     save () {
+      axios
+        .post('http://localhost:3003/edit', {
+          questionNo: this.editedItem.questionNo,
+          question: this.editedItem.question,
+          test_testNo: Number(this.editedItem.test_testNo),
+          lesson_lessonNo: Number(this.editedItem.lesson_lessonNo),
+          subLessonNo: Number(this.editedItem.subLessonNo),
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(response => {
+          console.log(response)
+          this.items = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
       if (this.editedIndex > -1) {
         Object.assign(this.questions[this.editedIndex], this.editedItem)
       } else {

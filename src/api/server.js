@@ -126,6 +126,23 @@ app.get('/question', cors(), (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
 })
 
+app.get('/lessonDetail', cors(), (req, res) => {
+  console.log("Fetching question")
+ 
+  const connection = getConnection()
+
+  connection.query('SELECT lessonDetailNo, lessonDescription, lessonName, sublessonName FROM LessonDetail ld JOIN Lesson l on ld.lesson_lessonNo = l.lessonNo JOIN SubLesson s on ld.sublessonNo = s.sublessonNo', 
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(500)
+          throw error
+      };
+      console.log("I think we fetched successfully")
+      res.json(rows)
+  })
+  res.setHeader('Access-Control-Allow-Origin', '*');
+})
 
 app.post('/question',cors(), (req, res) => {
     console.log("Add questions")
@@ -144,6 +161,24 @@ app.post('/question',cors(), (req, res) => {
         console.log("Add successfully")
         res.json(rows)
     })
+})
+
+app.post('/lessonDetail',cors(), (req, res) => {
+  console.log("Add lesson detail")
+  console.log(req.body.lessonDescription)
+  console.log(req.body.lesson_lessonNo)
+  console.log(req.body.subLessonNo)
+  const connection = getConnection()
+  connection.query('INSERT INTO LessonDetail(lessonDescription,lesson_lessonNo,sublessonNo) VALUES ("' + req.body.lessonDescription + '",' + req.body.lesson_lessonNo + ',' + req.body.subLessonNo + ')', 
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(500)
+          throw error
+      };
+      console.log("Add successfully")
+      res.json(rows)
+  })
 })
 
 app.post('/choices',cors(), (req, res) => {
@@ -199,6 +234,94 @@ app.get('/delete/(:questionNo)',cors(), (req, res) => {
       console.log("Delete question successfully")
       res.json(rows)
   })
+})
+
+app.get('/delete/lesson/(:lessonDetailNo)',cors(), (req, res) => {
+  var user = {lessonDetailNo: req.params.lessonDetailNo}
+  console.log("Delete lesson detail")
+  console.log(req.params.lessonDetailNo)
+  const connection = getConnection()
+  connection.query('DELETE FROM LessonDetail WHERE lessonDetailNo = ' + req.params.lessonDetailNo,
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(204)
+          throw error
+      };
+      console.log("lesson detail deleted successfully")
+      res.json(rows)
+  })
+})
+
+// app.get('/user', cors(), (req, res) => {
+//   const connection = getConnection()
+//   connection.query('SELECT username from Admin', 
+//   function (error, rows, fields) {
+//       if (error) { 
+//           console.log(error) 
+//           res.sendStatus(500)
+//           throw error
+//       };
+//       console.log("I think we fetched successfully")
+//       res.json(rows)
+//   })
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+// })
+
+// app.get('/pass', cors(), (req, res) => {
+//   const connection = getConnection()
+//   connection.query('SELECT password from Admin', 
+//   function (error, rows, fields) {
+//       if (error) { 
+//           console.log(error) 
+//           res.sendStatus(500)
+//           throw error
+//       };
+//       console.log("I think we fetched successfully")
+//       res.json(rows)
+//   })
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+// })
+
+app.post('/login',cors(), (req, res) =>{
+  console.log(req.body.username)
+  password = req.body.password
+  console.log(req.body.password)
+  const connection = getConnection()
+  connection.query('SELECT * FROM Admin WHERE username = "' + req.body.username + '"',
+  function (error, results, fields) {
+    if (error) {
+      // console.log("error ocurred",error);
+      res.send({
+        "code":400,
+        "failed":"error ocurred"
+      })
+    }
+    else{
+      // console.log('The solution is: ', results);
+      if(results.length >0){
+        if(results[0].password == password){
+          res.send({
+            "code":200,
+            "success":"login sucessfull"
+          });
+        }
+        else{
+          res.send({
+            "code":204,
+            "success":"Email and password does not match"
+          });
+          console.log('The username and / or password is incorrect')
+        }
+      }
+      else{
+        res.send({
+          "code":204,
+          "success":"Email does not exits"
+        });
+      }
+    }
+  });
 })
 
 app.use((req, res, next) => {
