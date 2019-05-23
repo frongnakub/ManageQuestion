@@ -1,4 +1,5 @@
 <template>
+<!--หน้านี้ไม่ได้ใช้-->
   <v-app id="web">
     <v-content>
       <v-container>
@@ -45,7 +46,8 @@
               box
           ></v-textarea>
           <v-card-actions class="justify-end">
-            <v-btn primary v-on:click="addQuestion()">Confirm</v-btn>
+            <v-btn primary v-on:click="close()">Cancle</v-btn>
+            <v-btn primary v-on:click="addQuestion()">Save</v-btn>
           </v-card-actions>
         </v-form>
       </v-container>
@@ -115,6 +117,9 @@ export default {
             console.log(error)
           })
       ]
+    },
+    close () {
+    this.$router.replace({ name: 'manageQuestion' })
     }
   }
 }

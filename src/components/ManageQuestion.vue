@@ -21,11 +21,11 @@
           <v-card>
             <v-layout align-center justify-center>
               <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
+                <span class="headline">Edit Question</span>
               </v-card-title>
             </v-layout>
-            <v-card-text>
-              <v-container grid-list-md>
+            <v-container grid-list-md>
+              <v-card-text>
                 <v-layout wrap>
                   <v-flex xs12 >
                     <v-list-tile><h3>- Question Number</h3></v-list-tile>
@@ -78,13 +78,12 @@
                     ></v-select>
                   </v-flex>
                 </v-layout>
-              </v-container>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-              <v-btn color="red darken-2" flat @click="save">Save</v-btn>
-            </v-card-actions>
+              </v-card-text>
+              <v-card-actions class="justify-end">
+                <v-btn primary v-on:click="close" color="red darken-2" flat>Cancle</v-btn>
+                <v-btn primary v-on:click="save" color="light-green accent-4" flat>Save</v-btn>
+              </v-card-actions>
+            </v-container>
           </v-card>
         </v-dialog>
         <v-data-table
@@ -155,11 +154,6 @@ export default {
       choices: ''
     }
   }),
-  computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? 'Add Question' : 'Edit Question'
-    }
-  },
   watch: {
     dialog (val) {
       val || this.close()
@@ -186,7 +180,6 @@ export default {
       ]
     },
     editItem (item) {
-      // this.$router.replace({ name: 'editQuestion' })
       this.editedIndex = this.questions.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true

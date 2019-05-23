@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+    <v-app light class="teal lighten-4">
       <v-content>
         <v-container fluid fill-height>
           <v-layout align-center justify-center>

@@ -41,10 +41,10 @@
               <span class="headline">{{ formTitle }}</span>
             </v-card-title>
           </v-layout>
-           <v-card-text>
-            <v-container grid-list-md>
+          <v-container grid-list-md>
+            <v-card-text>
               <v-layout wrap>
-                <v-flex xs12 >
+                <v-flex xs12>
                   <v-list-tile><h3>- Lesson Detail Number</h3></v-list-tile>
                   <v-text-field
                       v-model="editedItem.lessonDetailNo"
@@ -77,20 +77,20 @@
                 </v-flex>
                 <v-flex xs12 >
                   <v-list-tile><h3>-Lesson Detail</h3></v-list-tile>
-                  <v-text-field
-                    v-model="editedItem.lessonDescription"
-                    required
-                    box
-                  ></v-text-field>
+                    <v-textarea
+                      v-model="editedItem.lessonDescription"
+                      box
+                      name="input-7-4"
+                      counter="5000"
+                    ></v-textarea>
                 </v-flex>
               </v-layout>
-            </v-container>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-          </v-card-actions>
+            </v-card-text>
+            <v-card-actions class="justify-end">
+              <v-btn primary v-on:click="close" color="red darken-2" flat>Cancle</v-btn>
+              <v-btn primary v-on:click="save" color="light-green accent-4" flat>Save</v-btn>
+            </v-card-actions>
+          </v-container>
         </v-card>
       </v-dialog>
 

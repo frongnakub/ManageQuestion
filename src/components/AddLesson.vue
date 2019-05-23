@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app light >
     <v-content>
       <v-container>
         <v-layout align-center justify-center>
@@ -36,11 +36,11 @@
               v-model="lessonDescription"
               solo
               name="input-7-4"
-              counter="500"
+              counter="5000"
           ></v-textarea>
           <v-card-actions class="justify-end">
-            <v-btn primary v-on:click="close()" >Cancle</v-btn>
-            <v-btn primary v-on:click="addLessonDetail()" color="red darken-2">Confirm</v-btn>
+            <v-btn primary v-on:click="close()" color="red darken-2">Cancle</v-btn>
+            <v-btn primary v-on:click="addLessonDetail()" color="light-green accent-4">Save</v-btn>
           </v-card-actions>
         </v-form>
       </v-container>
