@@ -1,16 +1,15 @@
 <template>
   <div>
-    <v-toolbar color="cyan" fixed app clipped-left v-if="authenticated">
+    <v-toolbar color="teal darken-3" fixed app clipped-left v-if="authenticated">
       <v-toolbar-items >
-        <v-btn flat to="/ManageLesson">Manage Lesson</v-btn>
-        <v-btn flat to="/ManageQuestion">Manage Question</v-btn>
+        <v-btn flat to="/ManageLesson" >Manage Lesson</v-btn>
+        <v-btn flat to="/ManageQuestion" >Manage Question</v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn flat to="/" v-on:click.native="logout()" replace>Logout
        </v-btn>
       </v-toolbar-items>
-
     </v-toolbar>
     <router-view @authenticated ="setAuthenticated"/>
     <v-footer v-if="authenticated">
@@ -21,6 +20,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'App',
   data () {

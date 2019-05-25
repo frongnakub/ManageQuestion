@@ -1,7 +1,8 @@
 <template>
   <v-app light >
     <v-content>
-      <v-container>
+      <v-container></v-container>
+      <v-container lime lighten-3>
       <v-layout align-center justify-center>
         <span class="headline" >Add Question</span>
       </v-layout>
@@ -17,7 +18,7 @@
               item-text="lessonName"
               item-value="lessonNo"
               :rules="[v => !!v || 'Lesson required']"
-              box
+              solo
               required
             ></v-select>
           <v-list-tile><h3>- Sub Lesson *If no, selects dat(-)</h3></v-list-tile>
@@ -27,14 +28,14 @@
               item-text="subLessonName"
               item-value="subLessonNo"
               :rules="[v => !!v || 'Sub required']"
-              box
+              solo
               required
           ></v-select>
           <v-list-tile><h3>- Question*</h3></v-list-tile>
           <v-text-field
             v-model="question"
             required
-            box
+            solo
           ></v-text-field>
           <v-list-tile><h3>- Question for</h3></v-list-tile>
           <v-select
@@ -43,7 +44,7 @@
               item-text="testTypeName"
               item-value="testTypeNo"
               :rules="[v => !!v || 'Test required']"
-              box
+              solo
               required
             ></v-select>
           <v-card-actions class="justify-end">

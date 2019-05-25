@@ -1,7 +1,8 @@
 <template>
   <v-app light>
     <v-content>
-      <v-container>
+      <v-container></v-container>
+      <v-container lime lighten-3>
       <v-layout align-center justify-center>
         <span class="headline" >Add Choices</span>
       </v-layout>
@@ -17,7 +18,7 @@
               item-text="question"
               item-value="questionNo"
               :rules="[v => !!v || 'Question required']"
-              box
+              solo
               required
             ></v-select>
           <v-list-tile><h3>- Choice</h3></v-list-tile>
@@ -25,14 +26,14 @@
             label="Choice"
             v-model="choices"
             required
-            box
+            solo
           ></v-text-field>
           <v-list-tile><h3>- True or False</h3></v-list-tile>
           <v-text-field
             label="True or False"
             v-model="choiceType"
             required
-            box
+            solo
           ></v-text-field>
           <v-card-actions class="justify-end">
             <v-btn primary v-on:click="close()" color="red darken-2">Cancle</v-btn>

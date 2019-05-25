@@ -13,24 +13,6 @@
           ></v-text-field>
           <v-container>
             <v-layout justify-end>
-            <!--<v-menu>
-              <template #activator="{ on: menu }">
-                <v-btn
-                  color="primary"
-                  dark
-                  v-on="{ ...menu }"
-                >Add New Lesson</v-btn>
-              </template>
-              <v-list>
-                <v-list-tile
-                  v-for="(itemLesson, index) in itemsLesson"
-                  :key="index"
-                  @click="addNewData()"
-                >
-                  <v-list-tile-title>{{ itemLesson.Lesson }}</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>-->
               <v-btn v-on="on" to="/AddLesson">Add New Lesson</v-btn>
             </v-layout>
           </v-container>
@@ -77,12 +59,10 @@
                 </v-flex>
                 <v-flex xs12 >
                   <v-list-tile><h3>-Lesson Detail</h3></v-list-tile>
-                    <v-textarea
+                    <tiptap-vuetify
                       v-model="editedItem.lessonDescription"
-                      box
-                      name="input-7-4"
-                      counter="5000"
-                    ></v-textarea>
+                      :extensions="extensions"
+                    />
                 </v-flex>
               </v-layout>
             </v-card-text>
@@ -99,11 +79,6 @@
         :items="lesson"
         :search="search"
         class="elevation-1">
-            <!-- loading
-            <v-progress-circular
-              indeterminate
-              color="red"
-            ></v-progress-circular>-->
         <template v-slot:items="props">
           <td class="text-xs-center">{{ props.item.lessonDetailNo }}</td>
           <td class="text-xs-center">{{ props.item.lessonName }}</td>
@@ -275,7 +250,3 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-  .v-progress-circular
-    margin: 1rem
-</style>
