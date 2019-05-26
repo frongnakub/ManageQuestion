@@ -15,11 +15,11 @@ import AddQuestion from '@/components/AddQuestion'
 import AddLesson from '@/components/AddLesson'
 import AddChoice from '@/components/AddChoice'
 // import textEdit from '@/components/textEdit'
-import { TiptapVuetifyPlugin } from 'tiptap-vuetify'
-import 'tiptap-vuetify/dist/main.css'
-Vue.use(TiptapVuetifyPlugin, {
-  iconsGroup: 'md'
-})
+// import { TiptapVuetifyPlugin } from 'tiptap-vuetify'
+// import 'tiptap-vuetify/dist/main.css'
+// Vue.use(TiptapVuetifyPlugin, {
+//   iconsGroup: 'md'
+// })
 Vue.use(Router)
 Vue.use(Vuetify)
 

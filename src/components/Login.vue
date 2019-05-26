@@ -30,8 +30,8 @@ import axios from 'axios'
 export default {
   name: 'Login',
   data: () => ({
-    username: '',
-    password: ''
+    username: 'frongnakub',
+    password: '6679776z'
   }),
   methods: {
     login () {

@@ -59,10 +59,15 @@
                 </v-flex>
                 <v-flex xs12 >
                   <v-list-tile><h3>- Lesson Detail</h3></v-list-tile>
-                    <tiptap-vuetify
+                    <!-- <tiptap-vuetify
                       v-model="editedItem.lessonDescription"
                       :extensions="extensions"
-                    />
+                    /> -->
+                    <v-textarea
+                      v-model="editedItem.lessonDescription"
+                      box
+                      required
+                    ></v-textarea>
                 </v-flex>
               </v-layout>
             </v-card-text>
@@ -112,24 +117,24 @@
 
 <script>
 import axios from 'axios'
-import { TiptapVuetify,
-  Heading,
-  Bold,
-  Italic,
-  Strike,
-  Underline,
-  Paragraph,
-  BulletList,
-  OrderedList,
-  ListItem,
-  HardBreak,
-  HorizontalRule,
-  History
-} from 'tiptap-vuetify'
+// import { TiptapVuetify,
+//   Heading,
+//   Bold,
+//   Italic,
+//   Strike,
+//   Underline,
+//   Paragraph,
+//   BulletList,
+//   OrderedList,
+//   ListItem,
+//   HardBreak,
+//   HorizontalRule,
+//   History
+// } from 'tiptap-vuetify'
 
 export default {
   name: 'ManageLesson',
-  components: { TiptapVuetify },
+  // components: { TiptapVuetify },
   data: () => ({
     search: '',
     dialog: false,
@@ -147,24 +152,24 @@ export default {
       lessonName: '',
       subLesson: '',
       lessonDescription: ''
-    },
-    extensions: [
-      // you can specify options for extension
-      new Heading({
-        levels: [1, 2, 3]
-      }),
-      new Bold(),
-      new Italic(),
-      new Strike(),
-      new Underline(),
-      new Paragraph(),
-      new BulletList(),
-      new OrderedList(),
-      new ListItem(),
-      new HardBreak(),
-      new HorizontalRule(),
-      new History()
-    ]
+    }
+    // extensions: [
+    //   // you can specify options for extension
+    //   new Heading({
+    //     levels: [1, 2, 3]
+    //   }),
+    //   new Bold(),
+    //   new Italic(),
+    //   new Strike(),
+    //   new Underline(),
+    //   new Paragraph(),
+    //   new BulletList(),
+    //   new OrderedList(),
+    //   new ListItem(),
+    //   new HardBreak(),
+    //   new HorizontalRule(),
+    //   new History()
+    // ]
   }),
   computed: {
     formTitle () {
