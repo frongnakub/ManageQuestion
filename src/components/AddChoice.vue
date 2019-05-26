@@ -28,7 +28,7 @@
             required
             solo
           ></v-text-field>
-          <v-list-tile><h3>- True or False</h3></v-list-tile>
+          <v-list-tile><h3>- True or False (Fill T or F)</h3></v-list-tile>
           <v-text-field
             label="True or False"
             v-model="choiceType"
@@ -36,8 +36,8 @@
             solo
           ></v-text-field>
           <v-card-actions class="justify-end">
-            <v-btn primary v-on:click="close()" color="red darken-2">Cancle</v-btn>
             <v-btn primary v-on:click="addChoice()" color="light-green accent-4">Save</v-btn>
+            <v-btn primary v-on:click="close()" color="red darken-2">Cancel</v-btn>
           </v-card-actions>
         </v-form>
       </v-container>
@@ -91,9 +91,10 @@ export default {
         .catch(error => {
           console.log(error)
         })
+      this.close()
     },
     close () {
-      this.$router.replace({ name: 'manageQuestion' })
+      this.$router.replace({ name: 'manageChoice' })
     }
   }
 }

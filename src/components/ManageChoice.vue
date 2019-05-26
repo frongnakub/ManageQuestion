@@ -13,7 +13,7 @@
           ></v-text-field>
           <v-container>
             <v-layout justify-end>
-              <v-btn v-on="on" to="/AddLesson">Add Lesson</v-btn>
+              <v-btn v-on="on" to="/AddChoice">Add Choice</v-btn>
             </v-layout>
           </v-container>
         </template>
@@ -27,43 +27,41 @@
             <v-card-text>
               <v-layout wrap>
                 <v-flex xs12>
-                  <v-list-tile><h3>- Lesson Detail Number</h3></v-list-tile>
+                  <v-list-tile><h3>- Choice Number</h3></v-list-tile>
                   <v-text-field
-                      v-model="editedItem.lessonDetailNo"
+                      v-model="editedItem.choiceNo"
                       required
                       box
                       readonly="true"
                     ></v-text-field>
                 </v-flex>
                 <v-flex xs12 >
-                  <v-list-tile><h3>- Lesson</h3></v-list-tile>
+                  <v-list-tile><h3>- Question</h3></v-list-tile>
                   <v-select
-                    v-model="editedItem.lesson_lessonNo"
-                    :items="lessons"
-                    item-text="lessonName"
-                    item-value="lessonNo"
+                    v-model="editedItem.questionNo"
+                    :items="question"
+                    item-text="question"
+                    item-value="questionNo"
                     box
                     required
                   ></v-select>
                 </v-flex>
                 <v-flex xs12 >
-                  <v-list-tile><h3>- Sub Lesson</h3></v-list-tile>
-                  <v-select
-                    v-model="editedItem.subLessonNo"
-                    :items="subLessons"
-                    item-text="subLessonName"
-                    item-value="subLessonNo"
-                    box
-                    required
-                  ></v-select>
-                </v-flex>
+                    <v-list-tile><h3>- Choices</h3></v-list-tile>
+                    <v-text-field
+                      v-model="editedItem.choices"
+                      required
+                      box
+                    ></v-text-field>
+                  </v-flex>
                 <v-flex xs12 >
-                  <v-list-tile><h3>- Lesson Detail</h3></v-list-tile>
-                    <tiptap-vuetify
-                      v-model="editedItem.lessonDescription"
-                      :extensions="extensions"
-                    />
-                </v-flex>
+                    <v-list-tile><h3>- True or False (Fill T or F)</h3></v-list-tile>
+                    <v-text-field
+                      v-model="editedItem.choiceType"
+                      required
+                      box
+                    ></v-text-field>
+                  </v-flex>
               </v-layout>
             </v-card-text>
             <v-card-actions class="justify-end">
@@ -76,14 +74,14 @@
 
       <v-data-table
         :headers="headers"
-        :items="lesson"
+        :items="choices"
         :search="search"
         class="elevation-1">
         <template v-slot:items="props">
-          <!-- <td class="text-xs-center">{{ props.item.lessonDetailNo }}</td> -->
-          <td class="text-xs-center">{{ props.item.lessonName }}</td>
-          <td class="text-xs-center">{{ props.item.sublessonName }}</td>
-          <td class="text-xs-center">{{ props.item.lessonDescription }}</td>
+          <!-- <td class="text-xs-center">{{ props.item.choiceNo }}</td> -->
+          <td class="text-xs-center">{{ props.item.question }}</td>
+          <td class="text-xs-center">{{ props.item.choices }}</td>
+          <td class="text-xs-center">{{ props.item.choiceType }}</td>
           <td class="text-xs-center">
             <v-icon
               small
@@ -112,63 +110,30 @@
 
 <script>
 import axios from 'axios'
-import { TiptapVuetify,
-  Heading,
-  Bold,
-  Italic,
-  Strike,
-  Underline,
-  Paragraph,
-  BulletList,
-  OrderedList,
-  ListItem,
-  HardBreak,
-  HorizontalRule,
-  History
-} from 'tiptap-vuetify'
-
 export default {
-  name: 'ManageLesson',
-  components: { TiptapVuetify },
+  name: 'ManageChoice',
   data: () => ({
     search: '',
     dialog: false,
     headers: [
-      // { text: 'Lesson No', align: 'center', value: 'lessonDetailNo', sortable: false },
-      { text: 'Lesson', align: 'center', value: 'lessonName', sortable: false },
-      { text: 'Sub-Lesson', align: 'center', value: 'sublessonName', sortable: false },
-      { text: 'Detail', align: 'center', value: 'lessonDetail', sortable: false },
-      { text: 'Actions', align: 'center', value: 'lessonName', sortable: false }
+    //   { text: 'Choice No', align: 'center', value: 'choiceNo', sortable: false },
+      { text: 'Question', align: 'center', value: 'question', sortable: false },
+      { text: 'Choice', align: 'center', value: 'choices', sortable: false },
+      { text: 'Choice Type', align: 'center', value: 'choiceType', sortable: false },
+      { text: 'Actions', align: 'center', value: 'question', sortable: false }
     ],
-    lesson: [],
+    choices: [],
     editedIndex: -1,
     editedItem: {
-      lessonDetailNo: Number,
-      lessonName: '',
-      subLesson: '',
-      lessonDescription: ''
-    },
-    extensions: [
-      // you can specify options for extension
-      new Heading({
-        levels: [1, 2, 3]
-      }),
-      new Bold(),
-      new Italic(),
-      new Strike(),
-      new Underline(),
-      new Paragraph(),
-      new BulletList(),
-      new OrderedList(),
-      new ListItem(),
-      new HardBreak(),
-      new HorizontalRule(),
-      new History()
-    ]
+      choiceNo: Number,
+      choices: '',
+      choiceType: '',
+      question: ''
+    }
   }),
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'Add Lesson Detail' : 'Edit Lesson Detail'
+      return this.editedIndex === -1 ? 'Add Choice' : 'Edit Choice'
     }
   },
   watch: {
@@ -178,17 +143,16 @@ export default {
   },
   created () {
     this.initialize()
-    this.lessonName()
-    this.subLesson()
+    this.questionName()
   },
   methods: {
     initialize () {
-      this.lesson = [
+      this.choices = [
         axios
-          .get('http://localhost:3003/lessonDetail')
+          .get('http://localhost:3003/choices')
           .then(response => {
             console.log(response)
-            this.lesson = response.data
+            this.choices = response.data
           })
           .catch(error => {
             console.log(error)
@@ -197,13 +161,13 @@ export default {
     },
     editItem (item) {
       // this.$router.replace({ name: 'editQuestion' })
-      this.editedIndex = this.lesson.indexOf(item)
+      this.editedIndex = this.choices.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
     deleteItem (item) {
       axios
-        .get('http://localhost:3003/delete/lesson/' + item.lessonDetailNo, {
+        .get('http://localhost:3003/delete/choices/' + item.choiceNo, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -214,8 +178,8 @@ export default {
         .catch(error => {
           console.log(error)
         })
-      const index = this.lesson.indexOf(item)
-      confirm('Are you sure you want to delete this lesson detail?') && this.lesson.splice(index, 1)
+      const index = this.choices.indexOf(item)
+      confirm('Are you sure you want to delete this choice?') && this.choices.splice(index, 1)
     },
     close () {
       this.dialog = false
@@ -226,11 +190,11 @@ export default {
     },
     save () {
       axios
-        .post('http://localhost:3003/edit/lesson', {
-          lessonDetailNo: this.editedItem.lessonDetailNo,
-          lessonDescription: this.editedItem.lessonDescription,
-          lesson_lessonNo: Number(this.editedItem.lesson_lessonNo),
-          subLessonNo: Number(this.editedItem.subLessonNo),
+        .post('http://localhost:3003/edit/choices', {
+          choiceNo: this.editedItem.choiceNo,
+          questionNo: Number(this.editedItem.questionNo),
+          choices: this.editedItem.choices,
+          choiceType: this.editedItem.choiceType,
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -243,19 +207,19 @@ export default {
           console.log(error)
         })
       if (this.editedIndex > -1) {
-        Object.assign(this.lesson[this.editedIndex], this.editedItem)
+        Object.assign(this.choices[this.editedIndex], this.editedItem)
       } else {
-        this.lesson.push(this.editedItem)
+        this.choices.push(this.editedItem)
       }
       this.close()
     },
-    lessonName () {
-      this.lessons = [
+    questionName () {
+      this.question = [
         axios
-          .get('http://localhost:3003/lessonName')
+          .get('http://localhost:3003/question')
           .then(response => {
             console.log(response)
-            this.lessons = response.data
+            this.question = response.data
           })
           .catch(error => {
             console.log(error)

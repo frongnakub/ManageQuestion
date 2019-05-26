@@ -36,7 +36,7 @@ router.get('/messages', (req, res) => {
 app.use(router)
 
 app.get('/questions', cors(), (req, res) => {
-    console.log("Fetching question")
+    console.log("Fetching questions")
    
     const connection = getConnection()
 
@@ -55,7 +55,7 @@ app.get('/questions', cors(), (req, res) => {
 
 
 app.get('/lessonName', cors(), (req, res) => {
-    console.log("Fetching question")
+    console.log("Fetching lesson name")
    
     const connection = getConnection()
 
@@ -73,7 +73,7 @@ app.get('/lessonName', cors(), (req, res) => {
 })
 
 app.get('/subLessonName', cors(), (req, res) => {
-  console.log("Fetching question")
+  console.log("Fetching sublesson name")
  
   const connection = getConnection()
 
@@ -91,7 +91,7 @@ app.get('/subLessonName', cors(), (req, res) => {
 })
 
 app.get('/testName', cors(), (req, res) => {
-    console.log("Fetching question")
+    console.log("Fetching test name")
    
     const connection = getConnection()
 
@@ -109,7 +109,7 @@ app.get('/testName', cors(), (req, res) => {
 })
 
 app.get('/question', cors(), (req, res) => {
-  console.log("Fetching question")
+  console.log("Fetching question for add")
  
   const connection = getConnection()
 
@@ -127,11 +127,29 @@ app.get('/question', cors(), (req, res) => {
 })
 
 app.get('/lessonDetail', cors(), (req, res) => {
-  console.log("Fetching question")
+  console.log("Fetching lesson detail")
  
   const connection = getConnection()
 
   connection.query('SELECT lessonDetailNo, lessonDescription, lessonName, sublessonName FROM LessonDetail ld JOIN Lesson l on ld.lesson_lessonNo = l.lessonNo JOIN SubLesson s on ld.sublessonNo = s.sublessonNo', 
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(500)
+          throw error
+      };
+      console.log("I think we fetched successfully")
+      res.json(rows)
+  })
+  res.setHeader('Access-Control-Allow-Origin', '*');
+})
+
+app.get('/choices', cors(), (req, res) => {
+  console.log("Fetching choices")
+ 
+  const connection = getConnection()
+
+  connection.query('SELECT choiceNo, choices, choiceType, question FROM Choice c JOIN Question q on c.question_questionNo = q.questionNo', 
   function (error, rows, fields) {
       if (error) { 
           console.log(error) 
@@ -238,6 +256,25 @@ app.post('/edit/lesson', (req, res) => {
   })
 })
 
+app.post('/edit/choices', (req, res) => {
+  console.log("Edit choice")
+  console.log(req.body.choices)
+  console.log(req.body.choiceType)
+  console.log(req.body.choiceNo)
+  console.log(req.body.questionNo)
+  const connection = getConnection()
+  connection.query('UPDATE Choice SET choices = "' + req.body.choices + '", choiceType = "' + req.body.choiceType + '", question_questionNo = ' + req.body.questionNo + ' WHERE choiceNo = ' + req.body.choiceNo, 
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(500)
+          throw error
+      };
+      console.log("Edit choice successfully")
+      res.json(rows)
+  })
+})
+
 
 app.get('/delete/(:questionNo)',cors(), (req, res) => {
   var user = {questionNo: req.params.questionNo}
@@ -268,7 +305,24 @@ app.get('/delete/lesson/(:lessonDetailNo)',cors(), (req, res) => {
           res.sendStatus(204)
           throw error
       };
-      console.log("lesson detail deleted successfully")
+      console.log("Lesson detail has been deleted successfully")
+      res.json(rows)
+  })
+})
+
+app.get('/delete/choices/(:choiceNo)',cors(), (req, res) => {
+  var user = {choiceNo: req.params.choiceNo}
+  console.log("Delete choice")
+  console.log(req.params.choiceNo)
+  const connection = getConnection()
+  connection.query('DELETE FROM Choice WHERE choiceNo = ' + req.params.choiceNo,
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(204)
+          throw error
+      };
+      console.log("Choice has been deleted successfully")
       res.json(rows)
   })
 })

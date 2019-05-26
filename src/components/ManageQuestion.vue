@@ -13,8 +13,7 @@
             ></v-text-field>
             <v-container>
               <v-layout justify-end>
-                <v-btn v-on="on" to="/AddQuestion">Add New Question</v-btn>
-                <v-btn v-on="on" to="/AddChoice">Add Choices</v-btn>
+                <v-btn v-on="on" to="/AddQuestion">Add Question</v-btn>
               </v-layout>
             </v-container>
           </template>
@@ -80,8 +79,8 @@
                 </v-layout>
               </v-card-text>
               <v-card-actions class="justify-end">
-                <v-btn primary v-on:click="close" color="red darken-2" flat>Cancle</v-btn>
-                <v-btn primary v-on:click="save" color="light-green accent-4" flat>Save</v-btn>
+                <v-btn primary v-on:click="save" color="light-green accent-4" >Save</v-btn>
+                <v-btn primary v-on:click="close" color="red darken-2" >Cancel</v-btn>
               </v-card-actions>
             </v-container>
           </v-card>
@@ -93,7 +92,7 @@
           :loading="loading"
           class="elevation-1">
           <template v-slot:items="props">
-            <td class="text-xs-center">{{ props.item.questionNo }}</td>
+            <!-- <td class="text-xs-center">{{ props.item.questionNo }}</td> -->
             <td class="text-xs-center">{{ props.item.lessonName }}</td>
             <td class="text-xs-center">{{ props.item.subLessonName }}</td>
             <td class="text-xs-center">{{ props.item.testTypeName }}</td>
@@ -136,7 +135,7 @@ export default {
     search: '',
     dialog: false,
     headers: [
-      { text: 'Question No', align: 'center', value: 'questionNo', sortable: false },
+      // { text: 'Question No', align: 'center', value: 'questionNo', sortable: false },
       { text: 'Lesson', align: 'center', value: 'lessonName', sortable: false },
       { text: 'Sub-Lesson', align: 'center', value: 'subLessonName', sortable: false },
       { text: 'Question for', align: 'center', value: 'testTypeName', sortable: false },

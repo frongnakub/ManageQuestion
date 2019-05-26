@@ -8,7 +8,6 @@
           <span class="headline" >Add Lesson Detail</span>
         </v-layout>
       </v-container>
-      
         <v-container >
           <v-form
             ref="form"
@@ -40,32 +39,31 @@
                     v-model="lessonDescription"
                     :extensions="extensions"
                   />
-              
             <v-card-actions class="justify-end">
-              <v-btn primary v-on:click="close()" color="red darken-2">Cancle</v-btn>
               <v-btn primary v-on:click="addLessonDetail()" color="light-green accent-4">Save</v-btn>
+              <v-btn primary v-on:click="close()" color="red darken-2">Cancel</v-btn>
             </v-card-actions>
           </v-form>
-        </v-container>  
+        </v-container>
       </v-container>
     </v-content>
   </v-app>
 </template>
 <script>
 import axios from 'axios'
-import { TiptapVuetify, 
-        Heading, 
-        Bold, 
-        Italic, 
-        Strike, 
-        Underline, 
-        Paragraph, 
-        BulletList, 
-        OrderedList,
-        ListItem, 
-        HardBreak, 
-        HorizontalRule, 
-        History
+import { TiptapVuetify,
+  Heading,
+  Bold,
+  Italic,
+  Strike,
+  Underline,
+  Paragraph,
+  BulletList,
+  OrderedList,
+  ListItem,
+  HardBreak,
+  HorizontalRule,
+  History
 } from 'tiptap-vuetify'
 
 export default {

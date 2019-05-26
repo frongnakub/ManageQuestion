@@ -4,6 +4,7 @@
       <v-toolbar-items >
         <v-btn flat to="/ManageLesson" >Manage Lesson</v-btn>
         <v-btn flat to="/ManageQuestion" >Manage Question</v-btn>
+        <v-btn flat to="/ManageChoice" >Manage Choice</v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>

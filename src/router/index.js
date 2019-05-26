@@ -10,13 +10,13 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import Login from '@/components/Login'
 import ManageQuestion from '@/components/ManageQuestion'
 import ManageLesson from '@/components/ManageLesson'
+import ManageChoice from '@/components/ManageChoice'
 import AddQuestion from '@/components/AddQuestion'
 import AddLesson from '@/components/AddLesson'
 import AddChoice from '@/components/AddChoice'
-import textEdit from '@/components/textEdit'
+// import textEdit from '@/components/textEdit'
 import { TiptapVuetifyPlugin } from 'tiptap-vuetify'
 import 'tiptap-vuetify/dist/main.css'
- 
 Vue.use(TiptapVuetifyPlugin, {
   iconsGroup: 'md'
 })
@@ -45,6 +45,11 @@ export default new Router({
       path: '/ManageLesson',
       name: 'manageLesson',
       component: ManageLesson
+    },
+    {
+      path: '/ManageChoice',
+      name: 'manageChoice',
+      component: ManageChoice
     },
     {
       path: '/AddQuestion',
