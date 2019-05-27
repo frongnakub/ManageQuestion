@@ -145,7 +145,6 @@ export default {
           console.log(error)
         })
       alert('Add lesson detail successfully')
-      this.$router.replace({ name: 'manageLesson' })
       this.close()
     },
     subLesson () {

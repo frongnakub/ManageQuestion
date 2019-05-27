@@ -94,7 +94,12 @@ export default {
       this.close()
     },
     close () {
-      this.$router.replace({ name: 'manageChoice' })
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+        this.$router.replace({ name: 'manageChoice' })
+      }, 300)
     }
   }
 }

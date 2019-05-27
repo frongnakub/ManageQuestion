@@ -109,12 +109,7 @@ export default {
           console.log(error)
         })
       alert('Add question successfully')
-      const actc = confirm('Do you want add choices for this question ?')
-      if (actc === true) {
-        this.$router.replace({ name: 'addChoice' })
-      } else {
-        this.$router.replace({ name: 'manageQuestion' })
-      }
+      this.close()
     },
     testName () {
       this.tests = [
