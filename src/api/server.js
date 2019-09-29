@@ -20,7 +20,7 @@ app.use(cors())
 
 function getConnection(){
     return mysql.createConnection({
-        host: '34.219.161.63',
+        host: '54.68.60.227',
         user: 'proj',
         password: 'Oui_plic2',
         database: 'GrammarBE'
