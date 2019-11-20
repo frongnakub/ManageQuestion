@@ -28,9 +28,9 @@
             required
             solo
           ></v-text-field>
-          <v-list-tile><h3>- True or False (Fill T or F)</h3></v-list-tile>
+          <v-list-tile><h3>- CorrectAnswer</h3></v-list-tile>
           <v-text-field
-            label="True or False"
+            label="CorrectAnswer"
             v-model="choiceType"
             required
             solo

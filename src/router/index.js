@@ -9,17 +9,10 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import Login from '@/components/Login'
 import ManageQuestion from '@/components/ManageQuestion'
-import ManageLesson from '@/components/ManageLesson'
 import ManageChoice from '@/components/ManageChoice'
 import AddQuestion from '@/components/AddQuestion'
-import AddLesson from '@/components/AddLesson'
 import AddChoice from '@/components/AddChoice'
-// import textEdit from '@/components/textEdit'
-// import { TiptapVuetifyPlugin } from 'tiptap-vuetify'
-// import 'tiptap-vuetify/dist/main.css'
-// Vue.use(TiptapVuetifyPlugin, {
-//   iconsGroup: 'md'
-// })
+
 Vue.use(Router)
 Vue.use(Vuetify)
 
@@ -42,29 +35,9 @@ export default new Router({
       component: ManageQuestion
     },
     {
-      path: '/ManageLesson',
-      name: 'manageLesson',
-      component: ManageLesson
-    },
-    {
-      path: '/ManageChoice',
-      name: 'manageChoice',
-      component: ManageChoice
-    },
-    {
       path: '/AddQuestion',
       name: 'addQuestion',
       component: AddQuestion
-    },
-    {
-      path: '/AddLesson',
-      name: 'addLesson',
-      component: AddLesson
-    },
-    {
-      path: '/AddChoice',
-      name: 'addChoice',
-      component: AddChoice
     }
   ]
 })

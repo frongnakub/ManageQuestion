@@ -116,9 +116,11 @@ export default {
     search: '',
     dialog: false,
     headers: [
-    //   { text: 'Choice No', align: 'center', value: 'choiceNo', sortable: false },
       { text: 'Question', align: 'center', value: 'question', sortable: false },
-      { text: 'Choice', align: 'center', value: 'choices', sortable: false },
+      { text: 'Choice', align: 'center', value: 'choice1', sortable: false },
+      { text: 'Choice', align: 'center', value: 'choice2', sortable: false },
+      { text: 'Choice', align: 'center', value: 'choice3', sortable: false },
+      { text: 'Choice', align: 'center', value: 'choice4', sortable: false },
       { text: 'Choice Type', align: 'center', value: 'choiceType', sortable: false },
       { text: 'Actions', align: 'center', value: 'question', sortable: false }
     ],
@@ -126,7 +128,10 @@ export default {
     editedIndex: -1,
     editedItem: {
       choiceNo: Number,
-      choices: '',
+      choice1: '',
+      choice2: '',
+      choice3: '',
+      choice4: '',
       choiceType: '',
       question: ''
     }

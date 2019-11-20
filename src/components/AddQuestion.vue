@@ -21,16 +21,6 @@
               solo
               required
             ></v-select>
-          <v-list-tile><h3>- Sub Lesson *If no, selects dat(-)</h3></v-list-tile>
-          <v-select
-              v-model="subLessonNo"
-              :items="subLessons"
-              item-text="subLessonName"
-              item-value="subLessonNo"
-              :rules="[v => !!v || 'Sub required']"
-              solo
-              required
-          ></v-select>
           <v-list-tile><h3>- Question*</h3></v-list-tile>
           <v-text-field
             v-model="question"
@@ -47,6 +37,38 @@
               solo
               required
             ></v-select>
+          <v-list-tile><h3>- Choice</h3></v-list-tile>
+          <v-text-field
+            label="Choice"
+            v-model="choice1"
+            required
+            solo
+          ></v-text-field>
+          <v-text-field
+            label="Choice"
+            v-model="choice2"
+            required
+            solo
+          ></v-text-field>
+          <v-text-field
+            label="Choice"
+            v-model="choice3"
+            required
+            solo
+          ></v-text-field>
+          <v-text-field
+            label="Choice"
+            v-model="choice4"
+            required
+            solo
+          ></v-text-field>
+          <v-list-tile><h3>- CorrectAnswer</h3></v-list-tile>
+          <v-text-field
+            label="CorrectAnswer"
+            v-model="choiceType"
+            required
+            solo
+          ></v-text-field>
           <v-card-actions class="justify-end">
             <v-btn primary v-on:click="addQuestion()" color="light-green accent-4">Save</v-btn>
             <v-btn primary v-on:click="close()" color="red darken-2">Cancel</v-btn>
@@ -67,6 +89,10 @@ export default {
     lessons: [],
     subLessons: [],
     question: '',
+    choice1: '',
+    choice2: '',
+    choice3: '',
+    choice4: '',
     test_testNo: Number,
     lesson_lessonNo: Number,
     subLessonNo: Number

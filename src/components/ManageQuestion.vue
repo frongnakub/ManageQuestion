@@ -94,7 +94,6 @@
           <template v-slot:items="props">
             <!-- <td class="text-xs-center">{{ props.item.questionNo }}</td> -->
             <td class="text-xs-center">{{ props.item.lessonName }}</td>
-            <td class="text-xs-center">{{ props.item.subLessonName }}</td>
             <td class="text-xs-center">{{ props.item.testTypeName }}</td>
             <td class="text-xs-center">{{ props.item.question }}</td>
             <td class="text-xs-center">
@@ -137,9 +136,13 @@ export default {
     headers: [
       // { text: 'Question No', align: 'center', value: 'questionNo', sortable: false },
       { text: 'Lesson', align: 'center', value: 'lessonName', sortable: false },
-      { text: 'Sub-Lesson', align: 'center', value: 'subLessonName', sortable: false },
       { text: 'Question for', align: 'center', value: 'testTypeName', sortable: false },
       { text: 'Question', align: 'center', value: 'question', sortable: false },
+      { text: 'Choice', align: 'center', value: 'option1', sortable: false },
+      { text: 'Choice', align: 'center', value: 'option2', sortable: false },
+      { text: 'Choice', align: 'center', value: 'option3', sortable: false },
+      { text: 'Choice', align: 'center', value: 'option4', sortable: false },
+      { text: 'CorrectAnswer', align: 'correctAnswer', value: 'choice4', sortable: false },
       { text: 'Actions', align: 'center', value: 'question', sortable: false }
     ],
     questions: [],
@@ -148,9 +151,12 @@ export default {
       questionNo: Number,
       question: '',
       questionType: '',
-      lessonName: '',
-      subLessonName: '',
-      choices: ''
+      option1: '',
+      option2: '',
+      option3: '',
+      option4: '',
+      correctAnswer: '',
+      lessonName: ''
     }
   }),
   watch: {
@@ -162,7 +168,6 @@ export default {
     this.initialize()
     this.lessonName()
     this.testName()
-    this.subLesson()
   },
   methods: {
     initialize () {
@@ -252,19 +257,6 @@ export default {
           .then(response => {
             console.log(response)
             this.tests = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      ]
-    },
-    subLesson () {
-      this.subLessons = [
-        axios
-          .get('http://localhost:3003/subLessonName')
-          .then(response => {
-            console.log(response)
-            this.subLessons = response.data
           })
           .catch(error => {
             console.log(error)
