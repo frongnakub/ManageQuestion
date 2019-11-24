@@ -37,35 +37,38 @@
               solo
               required
             ></v-select>
-          <v-list-tile><h3>- Choice</h3></v-list-tile>
+          <v-list-tile><h3>- Option 1</h3></v-list-tile>
           <v-text-field
-            label="Choice"
-            v-model="choice1"
+            label="Option 1"
+            v-model="option1"
             required
             solo
           ></v-text-field>
+          <v-list-tile><h3>- Option 2</h3></v-list-tile>
           <v-text-field
-            label="Choice"
-            v-model="choice2"
+            label="Option 2"
+            v-model="option2"
             required
             solo
           ></v-text-field>
+          <v-list-tile><h3>- Option 3</h3></v-list-tile>
           <v-text-field
-            label="Choice"
-            v-model="choice3"
+            label="Option 3"
+            v-model="option3"
             required
             solo
           ></v-text-field>
+          <v-list-tile><h3>- Option 4</h3></v-list-tile>
           <v-text-field
-            label="Choice"
-            v-model="choice4"
+            label="Option 4"
+            v-model="option4"
             required
             solo
           ></v-text-field>
           <v-list-tile><h3>- CorrectAnswer</h3></v-list-tile>
           <v-text-field
-            label="CorrectAnswer"
-            v-model="choiceType"
+            label="Correct Answer"
+            v-model="correctAnswer"
             required
             solo
           ></v-text-field>
@@ -89,13 +92,13 @@ export default {
     lessons: [],
     subLessons: [],
     question: '',
-    choice1: '',
-    choice2: '',
-    choice3: '',
-    choice4: '',
+    option1: '',
+    option2: '',
+    option3: '',
+    option4: '',
+    correctAnswer: '',
     test_testNo: Number,
-    lesson_lessonNo: Number,
-    subLessonNo: Number
+    lesson_lessonNo: Number
   }),
   created () {
     this.initialize()
@@ -122,7 +125,11 @@ export default {
           question: this.question,
           test_testNo: Number(this.test_testNo),
           lesson_lessonNo: Number(this.lesson_lessonNo),
-          subLessonNo: Number(this.subLessonNo),
+          option1: this.option1,
+          option2: this.option2,
+          option3: this.option3,
+          option4: this.option4,
+          correctAnswer: this.correctAnswer,
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -134,7 +141,7 @@ export default {
         .catch(error => {
           console.log(error)
         })
-      alert('Add question successfully')
+      alert('Add question successfully.')
       this.close()
     },
     testName () {
@@ -144,19 +151,6 @@ export default {
           .then(response => {
             console.log(response)
             this.tests = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      ]
-    },
-    subLesson () {
-      this.subLessons = [
-        axios
-          .get('http://localhost:3003/subLessonName')
-          .then(response => {
-            console.log(response)
-            this.subLessons = response.data
           })
           .catch(error => {
             console.log(error)

@@ -95,7 +95,7 @@ app.get('/testName', cors(), (req, res) => {
    
     const connection = getConnection()
 
-    connection.query('SELECT testTypeNo,testTypeName from Test t join TestType tt on t.testType_testTypeNo = tt.testTypeNo', 
+    connection.query('SELECT testNo,testTypeNo,testTypeName from Test t join TestType tt on t.testType_testTypeNo = tt.testTypeNo', 
     function (error, rows, fields) {
         if (error) { 
             console.log(error) 
@@ -149,7 +149,7 @@ app.get('/questions', cors(), (req, res) => {
  
   const connection = getConnection()
 
-  connection.query('SELECT questionNo, question ,option1 , option2 , option3 , option4 , correctAnswer,lessonName,testTypeName FROM Question q join Lesson l on q.Lesson_LessonNo = l.LessonNo join Test t on q.test_testno = t.testno join TestType tt on t.testType_TestTypeNo = tt.testTypeNo ', 
+  connection.query('SELECT questionNo, question ,option1 , option2 , option3 , option4 , correctAnswer, lessonName, testTypeName FROM Question q join Lesson l on q.Lesson_LessonNo = l.LessonNo join Test t on q.test_testno = t.testno join TestType tt on t.testType_TestTypeNo = tt.testTypeNo ', 
   function (error, rows, fields) {
       if (error) { 
           console.log(error) 
@@ -167,9 +167,13 @@ app.post('/question',cors(), (req, res) => {
     console.log(req.body.question)
     console.log(req.body.test_testNo)
     console.log(req.body.lesson_lessonNo)
-    console.log(req.body.subLessonNo)
+    console.log(req.body.option1)
+    console.log(req.body.option2)
+    console.log(req.body.option3)
+    console.log(req.body.option4)
+    console.log(req.body.correctAnswer)
     const connection = getConnection()
-    connection.query('INSERT INTO Question(question,test_testNo,lesson_lessonNo,sublessonNo) VALUES ("' + req.body.question + '",'+ req.body.test_testNo + ',' + req.body.lesson_lessonNo + ',' + req.body.subLessonNo + ')', 
+    connection.query('INSERT INTO Question(question,test_testNo,lesson_lessonNo,option1,option2,option3,option4,correctAnswer) VALUES ("' + req.body.question + '",'+ req.body.test_testNo + ',' + req.body.lesson_lessonNo + ',"' + req.body.option1 + '","' + req.body.option2 + '","' + req.body.option3 + '","' + req.body.option4 + '","' + req.body.correctAnswer + '")', 
     function (error, rows, fields) {
         if (error) { 
             console.log(error) 
@@ -217,25 +221,29 @@ app.post('/question',cors(), (req, res) => {
 //   })
 // })
 
-// app.post('/edit', (req, res) => {
-//   console.log("Edit questions")
-//   console.log(req.body.questionNo)
-//   console.log(req.body.question)
-//   console.log(req.body.test_testNo)
-//   console.log(req.body.lesson_lessonNo)
-//   console.log(req.body.subLessonNo)
-//   const connection = getConnection()
-//   connection.query('UPDATE Question SET question = "' + req.body.question + '", test_testNo = '+ req.body.test_testNo + ', lesson_lessonNo = ' + req.body.lesson_lessonNo + ', subLessonNo = ' + req.body.subLessonNo + ' WHERE questionNo = ' + req.body.questionNo, 
-//   function (error, rows, fields) {
-//       if (error) { 
-//           console.log(error) 
-//           res.sendStatus(500)
-//           throw error
-//       };
-//       console.log("Add successfully")
-//       res.json(rows)
-//   })
-// })
+app.post('/edit', (req, res) => {
+  console.log("Edit questions")
+  console.log(req.body.questionNo)
+  console.log(req.body.question)
+  console.log(req.body.test_testNo)
+  console.log(req.body.lesson_lessonNo)
+  console.log(req.body.option1)
+  console.log(req.body.option2)
+  console.log(req.body.option3)
+  console.log(req.body.option4)
+  console.log(req.body.correctAnswer)
+  const connection = getConnection()
+  connection.query('UPDATE Question SET question = "' + req.body.question + '", test_testNo = '+ req.body.test_testNo + ', option1 = "' + req.body.option1 + '", option2 = "' + req.body.option2 + '", option3 = "' + req.body.option3 + '", option4 = "' + req.body.option4 + '", correctAnswer = "' + req.body.correctAnswer + '" WHERE questionNo = ' + req.body.questionNo, 
+  function (error, rows, fields) {
+      if (error) { 
+          console.log(error) 
+          res.sendStatus(500)
+          throw error
+      };
+      console.log("Edit successfully")
+      res.json(rows)
+  })
+})
 
 // app.post('/edit/lesson', (req, res) => {
 //   console.log("Edit lesson detail")

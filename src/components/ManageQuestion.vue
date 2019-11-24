@@ -47,17 +47,6 @@
                     ></v-select>
                   </v-flex>
                   <v-flex xs12 >
-                    <v-list-tile><h3>- Sub Lesson</h3></v-list-tile>
-                    <v-select
-                      v-model="editedItem.subLessonNo"
-                      :items="subLessons"
-                      item-text="subLessonName"
-                      item-value="subLessonNo"
-                      box
-                      required
-                    ></v-select>
-                  </v-flex>
-                  <v-flex xs12 >
                     <v-list-tile><h3>- Question</h3></v-list-tile>
                     <v-text-field
                       v-model="editedItem.question"
@@ -75,6 +64,46 @@
                       box
                       required
                     ></v-select>
+                  </v-flex>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- Option 1</h3></v-list-tile>
+                    <v-text-field
+                      v-model="editedItem.option1"
+                      required
+                      box
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- Option 2</h3></v-list-tile>
+                    <v-text-field
+                      v-model="editedItem.option2"
+                      required
+                      box
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- Option 3</h3></v-list-tile>
+                    <v-text-field
+                      v-model="editedItem.option3"
+                      required
+                      box
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- Option 4</h3></v-list-tile>
+                    <v-text-field
+                      v-model="editedItem.option4"
+                      required
+                      box
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 >
+                    <v-list-tile><h3>- CorrectAnswer</h3></v-list-tile>
+                    <v-text-field
+                      v-model="editedItem.correctAnswer"
+                      required
+                      box
+                    ></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
@@ -96,6 +125,11 @@
             <td class="text-xs-center">{{ props.item.lessonName }}</td>
             <td class="text-xs-center">{{ props.item.testTypeName }}</td>
             <td class="text-xs-center">{{ props.item.question }}</td>
+            <td class="text-xs-center">{{ props.item.option1 }}</td>
+            <td class="text-xs-center">{{ props.item.option2 }}</td>
+            <td class="text-xs-center">{{ props.item.option3 }}</td>
+            <td class="text-xs-center">{{ props.item.option4 }}</td>
+            <td class="text-xs-center">{{ props.item.correctAnswer }}</td>
             <td class="text-xs-center">
               <v-icon
                 small
@@ -138,10 +172,10 @@ export default {
       { text: 'Lesson', align: 'center', value: 'lessonName', sortable: false },
       { text: 'Question for', align: 'center', value: 'testTypeName', sortable: false },
       { text: 'Question', align: 'center', value: 'question', sortable: false },
-      { text: 'Choice', align: 'center', value: 'option1', sortable: false },
-      { text: 'Choice', align: 'center', value: 'option2', sortable: false },
-      { text: 'Choice', align: 'center', value: 'option3', sortable: false },
-      { text: 'Choice', align: 'center', value: 'option4', sortable: false },
+      { text: 'Option1', align: 'center', value: 'option1', sortable: false },
+      { text: 'Option2', align: 'center', value: 'option2', sortable: false },
+      { text: 'Option3', align: 'center', value: 'option3', sortable: false },
+      { text: 'Option4', align: 'center', value: 'option4', sortable: false },
       { text: 'CorrectAnswer', align: 'correctAnswer', value: 'choice4', sortable: false },
       { text: 'Actions', align: 'center', value: 'question', sortable: false }
     ],
@@ -218,7 +252,11 @@ export default {
           question: this.editedItem.question,
           test_testNo: Number(this.editedItem.test_testNo),
           lesson_lessonNo: Number(this.editedItem.lesson_lessonNo),
-          subLessonNo: Number(this.editedItem.subLessonNo),
+          option1: this.editedItem.option1,
+          option2: this.editedItem.option2,
+          option3: this.editedItem.option3,
+          option4: this.editedItem.option4,
+          correctAnswer: this.editedItem.correctAnswer,
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -235,6 +273,7 @@ export default {
       } else {
         this.questions.push(this.editedItem)
       }
+      alert('Edit question successfully.')
       this.close()
     },
     lessonName () {

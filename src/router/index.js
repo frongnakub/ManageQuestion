@@ -9,9 +9,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import Login from '@/components/Login'
 import ManageQuestion from '@/components/ManageQuestion'
-import ManageChoice from '@/components/ManageChoice'
 import AddQuestion from '@/components/AddQuestion'
-import AddChoice from '@/components/AddChoice'
 
 Vue.use(Router)
 Vue.use(Vuetify)
